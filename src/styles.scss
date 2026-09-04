@@ -1,1 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-paper: #FAFAF9;
+  --color-card: #FFFFFF;
+  --color-line: #E7E5E4;
+  --color-ink: #0F0F0F;
+  --color-sub: #6B7280;
+  --color-mut: #9CA3AF;
+  --color-brand: #F4511E;
+  --color-brandsoft: #FFF1EC;
+  --color-ok: #16A34A;
+  --color-warn: #EAB308;
+  --color-err: #DC2626;
+  --color-night: #111111;
+
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Sizing & Layout (generates max-w-shell) */
+  --width-shell: 1200px;
+  
+  /* Border Radius (generates rounded-xl2) */
+  --radius-xl2: 14px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px 0 rgb(17 17 17 / 0.04);
+  --shadow-pop: 0 10px 30px -12px rgb(17 17 17 / 0.14);
+}
+
+/* Global Styles */
+html { 
+  -webkit-font-smoothing: antialiased; 
+}
+
+body { 
+  background-color: var(--color-paper); 
+  color: var(--color-ink); 
+  min-height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
+}
+
+h1, h2, h3 { letter-spacing: -0.02em; }
+h1 { letter-spacing: -0.03em; }
+
+/* Angular Active Route Styling */
+.navlink { 
+  position: relative; 
+  padding-bottom: 26px; 
+  margin-bottom: -26px; 
+  transition: color 0.2s;
+}
+.navlink.active { color: var(--color-brand); }
+.navlink.active::after {
+  content: ""; 
+  position: absolute; 
+  left: 0; right: 0; bottom: 0;
+  height: 2px; 
+  background: var(--color-brand);
+}
+
+/* Custom Scrollbar for tables */
+.thin-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 8px; }
+table { border-collapse: separate; border-spacing: 0; }

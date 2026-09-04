@@ -1,0 +1,666 @@
+<main>
+  <!-- HERO -->
+  <section class="mx-auto max-w-shell px-6 pt-16">
+    <div class="grid items-start gap-12 lg:grid-cols-[1fr_520px]">
+      <div>
+        <h1 class="text-[54px] font-extrabold leading-[1.06]">
+          Understand production<br />incidents in minutes,<br />not hours
+        </h1>
+        <p class="mt-6 max-w-[460px] text-[17px] leading-relaxed text-sub">
+          TraceLens correlates all your signals and code changes to help you find the root cause and
+          resolve faster.
+        </p>
+
+        <form class="mt-8 flex max-w-[430px] gap-3" (submit)="$event.preventDefault()">
+          <input
+            type="email"
+            placeholder="Work email"
+            class="h-[46px] w-full rounded-lg border border-line bg-card px-4 text-[15px] outline-none placeholder:text-mut focus:border-brand"
+          />
+          <button
+            routerLink="/signin"
+            class="h-[46px] shrink-0 rounded-lg bg-brand px-5 text-[15px] font-semibold text-white hover:bg-[#dd451a]"
+          >
+            Start free trial
+          </button>
+        </form>
+        <div class="mt-3 flex items-center gap-6 text-[14px] text-sub">
+          <span class="flex items-center gap-1.5"
+            ><i data-lucide="check" class="h-4 w-4 text-mut"></i>14-day free trial</span
+          >
+          <span class="flex items-center gap-1.5"
+            ><i data-lucide="check" class="h-4 w-4 text-mut"></i>No credit card required</span
+          >
+        </div>
+        <a
+          routerLink="#"
+          (click)="$event.preventDefault()"
+          class="mt-6 inline-flex items-center gap-2 rounded-lg border border-line bg-card px-4 py-2.5 text-[15px] font-medium hover:border-ink/30"
+        >
+          <i data-lucide="calendar" class="h-4 w-4"></i> Book a demo
+        </a>
+      </div>
+
+      <!-- incident card -->
+      <div class="rounded-xl2 border border-line bg-card p-6 shadow-card">
+        <div class="flex items-center justify-between">
+          <span
+            class="flex items-center gap-2 font-mono text-[12px] uppercase tracking-wider text-brand"
+            ><span class="h-2 w-2 rounded-full bg-brand"></span>Incident</span
+          >
+          <span class="text-[13px] text-mut">Started 32m ago</span>
+        </div>
+        <h3 class="mt-4 text-[20px] font-bold">Checkout service latency elevated</h3>
+        <div class="mt-3 flex flex-wrap gap-2 text-[12px]">
+          <span class="rounded-md bg-brandsoft px-2 py-1 font-mono font-medium text-brand"
+            >SEV-2</span
+          >
+          <span class="rounded-md border border-line px-2 py-1 text-sub">Latency</span>
+          <span class="rounded-md border border-line px-2 py-1 text-sub">checkout</span>
+        </div>
+        <dl class="mt-5 space-y-2.5 text-[14px]">
+          <div class="flex justify-between">
+            <dt class="text-sub">Impacted</dt>
+            <dd>12.4% of requests</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sub">Services</dt>
+            <dd>checkout-api</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sub">Started</dt>
+            <dd>May 12, 2025 10:42 AM PDT</dd>
+          </div>
+        </dl>
+        <div class="my-5 h-px bg-line"></div>
+        <p class="text-[14px] font-semibold">Likely root cause</p>
+        <p class="mt-2 text-[14px] leading-relaxed text-sub">
+          Deployment <span class="font-mono text-ink">1f3a9c0</span> increased p95 latency in
+          <a routerLink="#" class="font-mono text-brand underline underline-offset-2"
+            >DatabaseClient.query</a
+          >
+        </p>
+        <a
+          routerLink="/product"
+          class="mt-4 inline-flex items-center gap-1.5 text-[14px] font-medium text-brand"
+          >View analysis <i data-lucide="arrow-right" class="h-4 w-4"></i
+        ></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP MOCKUP -->
+  <section class="mx-auto mt-14 max-w-shell px-6">
+    <div class="overflow-hidden rounded-xl2 border border-line bg-card shadow-pop">
+      <div class="grid grid-cols-[210px_1fr]">
+        <!-- dark sidebar -->
+        <aside class="flex min-h-[600px] flex-col bg-night p-4 text-white/70">
+          <div class="mb-6 flex items-center gap-2 text-white">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M3 8V5a2 2 0 0 1 2-2h3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M21 16v3a2 2 0 0 1-2 2h-3"
+                stroke="#F4511E"
+                stroke-width="2.4"
+                stroke-linecap="round"
+              />
+              <circle cx="12" cy="12" r="2.4" fill="#F4511E" />
+            </svg>
+            <span class="text-[15px] font-bold">TraceLens</span>
+          </div>
+          <nav class="space-y-0.5 text-[13px]">
+            <span class="flex items-center gap-2.5 rounded-md bg-white/10 px-2.5 py-2 text-white"
+              ><i data-lucide="layout-dashboard" class="h-4 w-4"></i>Overview</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="alert-triangle" class="h-4 w-4"></i>Incidents</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="box" class="h-4 w-4"></i>Services</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="git-branch" class="h-4 w-4"></i>Traces</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="scroll-text" class="h-4 w-4"></i>Logs</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="circle-alert" class="h-4 w-4"></i>Errors</span
+            >
+            <div class="my-3 h-px bg-white/10"></div>
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="rocket" class="h-4 w-4"></i>Deployments</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="git-commit-horizontal" class="h-4 w-4"></i>Changes</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="bar-chart-3" class="h-4 w-4"></i>Dashboards</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="bell" class="h-4 w-4"></i>Alerts</span
+            >
+            <span class="flex items-center gap-2.5 rounded-md px-2.5 py-2"
+              ><i data-lucide="settings" class="h-4 w-4"></i>Settings</span
+            >
+          </nav>
+          <div
+            class="mt-auto flex items-center gap-2 border-t border-white/10 pt-4 text-[13px] text-white"
+          >
+            <span
+              class="flex h-6 w-6 items-center justify-center rounded-full bg-white/15 font-mono text-[11px]"
+              >A</span
+            >
+            Acme Corp <i data-lucide="chevron-down" class="ml-auto h-4 w-4 text-white/50"></i>
+          </div>
+        </aside>
+
+        <!-- app body -->
+        <div class="p-6 bg-card">
+          <p class="font-mono text-[12px] text-mut">Incidents &nbsp;›&nbsp; INC-4987</p>
+          <div class="mt-2 flex flex-wrap items-center gap-3">
+            <h3 class="text-[20px] font-bold">Checkout service latency elevated</h3>
+            <span
+              class="rounded-md bg-brandsoft px-2 py-0.5 font-mono text-[12px] font-medium text-brand"
+              >SEV-2</span
+            >
+            <div class="ml-auto flex items-center gap-2 text-[13px]">
+              <span class="text-sub">Status</span>
+              <span class="flex items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5"
+                ><span class="h-2 w-2 rounded-full bg-ok"></span>Resolved
+                <i data-lucide="chevron-down" class="h-3.5 w-3.5 text-mut"></i
+              ></span>
+              <span class="flex items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5"
+                ><i data-lucide="share-2" class="h-3.5 w-3.5"></i>Share</span
+              >
+              <span class="rounded-md border border-line px-2 py-1.5"
+                ><i data-lucide="more-vertical" class="h-3.5 w-3.5"></i
+              ></span>
+            </div>
+          </div>
+          <div class="mt-2 flex flex-wrap items-center gap-4 text-[13px] text-sub">
+            <span class="flex items-center gap-1.5"
+              ><i data-lucide="calendar" class="h-3.5 w-3.5"></i>May 12, 10:42 AM PDT</span
+            >
+            <span class="flex items-center gap-1.5"
+              ><i data-lucide="clock" class="h-3.5 w-3.5"></i>32m ago</span
+            >
+            <span class="flex items-center gap-1.5"
+              ><i data-lucide="box" class="h-3.5 w-3.5"></i>checkout-api</span
+            >
+            <span class="flex items-center gap-1.5"
+              ><i data-lucide="history" class="h-3.5 w-3.5"></i>Past incident</span
+            >
+          </div>
+
+          <div class="mt-4 flex gap-6 border-b border-line text-[13px] text-sub">
+            <span class="-mb-px border-b-2 border-ink pb-2.5 font-medium text-ink">Summary</span>
+            <span class="pb-2.5">Timeline</span><span class="pb-2.5">Correlations</span
+            ><span class="pb-2.5">Traces</span> <span class="pb-2.5">Logs</span
+            ><span class="pb-2.5">Changes</span><span class="pb-2.5">Similar incidents</span>
+          </div>
+
+          <div class="mt-4 grid gap-4 lg:grid-cols-2">
+            <div class="rounded-xl2 border border-line p-4">
+              <p class="text-[14px] font-semibold">What happened</p>
+              <p class="mt-1 text-[13px] text-sub">
+                Latency spiked starting at 10:42 AM PDT and affected 12.4% of requests.
+              </p>
+              <svg viewBox="0 0 480 150" class="mt-4 h-[150px] w-full">
+                <g stroke="#E7E5E4" stroke-dasharray="3 4">
+                  <line x1="40" y1="20" x2="470" y2="20" />
+                  <line x1="40" y1="55" x2="470" y2="55" />
+                  <line x1="40" y1="90" x2="470" y2="90" />
+                  <line x1="40" y1="125" x2="470" y2="125" />
+                </g>
+                <g fill="#9CA3AF" font-size="10" font-family="JetBrains Mono">
+                  <text x="6" y="24">2k</text>
+                  <text x="2" y="59">1.5k</text>
+                  <text x="10" y="94">1k</text>
+                  <text x="6" y="129">500</text>
+                </g>
+                <line x1="248" y1="14" x2="248" y2="128" stroke="#9CA3AF" stroke-dasharray="4 4" />
+                <polyline
+                  fill="none"
+                  stroke="#F4511E"
+                  stroke-width="2"
+                  points="45,118 65,116 85,120 105,115 125,119 145,114 165,118 185,116 205,120 225,117 248,116 268,86 288,52 308,74 328,96 348,80 368,104 388,98 408,102 428,100 450,104"
+                />
+                <g fill="#F4511E">
+                  <circle cx="288" cy="52" r="3" />
+                  <circle cx="268" cy="86" r="3" />
+                  <circle cx="308" cy="74" r="3" />
+                  <circle cx="348" cy="80" r="3" />
+                  <circle cx="450" cy="104" r="3" />
+                </g>
+                <g fill="#9CA3AF" font-size="10" font-family="JetBrains Mono">
+                  <text x="40" y="146">10:20 AM</text>
+                  <text x="130" y="146">10:30 AM</text>
+                  <text x="222" y="146">10:40 AM</text>
+                  <text x="312" y="146">10:50 AM</text>
+                  <text x="402" y="146">11:00 AM</text>
+                </g>
+              </svg>
+            </div>
+            <div class="rounded-xl2 border border-line p-4">
+              <p class="text-[14px] font-semibold">Root cause</p>
+              <p class="mt-1 text-[13px] leading-relaxed text-sub">
+                Deployment <span class="font-mono text-ink">1f3a9c0</span> introduced a 6.3x
+                increase in p95 latency.
+              </p>
+              <div class="mt-3 rounded-lg bg-[#F5F5F4] p-3 font-mono text-[12px] leading-6">
+                <div class="text-ink">DatabaseClient.query</div>
+                <div class="text-ok">+ &nbsp;added retry loop on serialization failures</div>
+                <div class="text-ok">+ &nbsp;max retries: 5</div>
+                <div class="text-ok">+ &nbsp;backoff: 100ms</div>
+              </div>
+              <a
+                routerLink="#"
+                class="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-brand"
+                >View correlated changes <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="mt-4 grid gap-4 lg:grid-cols-3">
+            <div class="rounded-xl2 border border-line p-4">
+              <p class="text-[14px] font-semibold">Impact</p>
+              <p class="mt-2 text-[13px] text-sub">12.4% of requests</p>
+              <div class="mt-3 h-px bg-line"></div>
+              <div class="mt-3 grid grid-cols-2 text-[13px]">
+                <div>
+                  <p class="text-sub">Affected users</p>
+                  <p class="mt-1 font-semibold">21.3K</p>
+                </div>
+                <div>
+                  <p class="text-sub">Duration</p>
+                  <p class="mt-1 font-semibold">32m</p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-xl2 border border-line p-4">
+              <p class="text-[14px] font-semibold">Top contributors</p>
+              <div class="mt-3 space-y-2.5 text-[13px]">
+                <div class="flex items-center gap-3">
+                  <span class="w-[112px] truncate text-sub">checkout-api</span
+                  ><span class="h-1.5 flex-1 rounded-full bg-line"
+                    ><span class="block h-1.5 w-[82%] rounded-full bg-brand"></span></span
+                  ><span class="w-8 text-right font-mono text-[12px]">82%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="w-[112px] truncate text-sub">db (aurora-primary)</span
+                  ><span class="h-1.5 flex-1 rounded-full bg-line"
+                    ><span class="block h-1.5 w-[63%] rounded-full bg-brand"></span></span
+                  ><span class="w-8 text-right font-mono text-[12px]">63%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="w-[112px] truncate text-sub">redis-cache</span
+                  ><span class="h-1.5 flex-1 rounded-full bg-line"
+                    ><span class="block h-1.5 w-[12%] rounded-full bg-brand"></span></span
+                  ><span class="w-8 text-right font-mono text-[12px]">12%</span>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-xl2 border border-line p-4">
+              <p class="text-[14px] font-semibold">Related</p>
+              <div class="mt-3 divide-y divide-line text-[13px]">
+                <div class="flex items-center justify-between py-2">
+                  <span class="text-sub">Errors</span
+                  ><span class="flex items-center gap-2 font-medium"
+                    >342 <i data-lucide="chevron-right" class="h-3.5 w-3.5 text-mut"></i
+                  ></span>
+                </div>
+                <div class="flex items-center justify-between py-2">
+                  <span class="text-sub">Traces</span
+                  ><span class="flex items-center gap-2 font-medium"
+                    >12.4K <i data-lucide="chevron-right" class="h-3.5 w-3.5 text-mut"></i
+                  ></span>
+                </div>
+                <div class="flex items-center justify-between py-2">
+                  <span class="text-sub">Deployments</span
+                  ><span class="flex items-center gap-2 font-medium"
+                    >1 <i data-lucide="chevron-right" class="h-3.5 w-3.5 text-mut"></i
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE FEATURES -->
+  <section class="border-y border-line bg-[#F7F6F4]">
+    <div class="mx-auto grid max-w-shell gap-10 px-6 py-16 lg:grid-cols-[300px_1fr]">
+      <h2 class="text-[24px] font-bold leading-snug">
+        Built for how engineers debug in production
+      </h2>
+      <div class="grid gap-x-12 gap-y-8 md:grid-cols-2">
+        <!-- Feature 1 -->
+        <div class="flex gap-4">
+          <span
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-card text-brand"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+          </span>
+          <div>
+            <p class="font-semibold text-ink">Stack traces with context</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-sub">
+              Deobfuscated, symbolicated, and grouped across releases and services.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="flex gap-4">
+          <span
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-card text-brand"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="3"></circle>
+              <line x1="3" y1="12" x2="9" y2="12"></line>
+              <line x1="15" y1="12" x2="21" y2="12"></line>
+            </svg>
+          </span>
+          <div>
+            <p class="font-semibold text-ink">Git-aware root cause</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-sub">
+              Automatically analyzes commits and diffs around the time of the incident.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="flex gap-4">
+          <span
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-card text-brand"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+              ></path>
+              <path
+                d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+              ></path>
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+            </svg>
+          </span>
+          <div>
+            <p class="font-semibold text-ink">Deployments &amp; changes</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-sub">
+              See what shipped, where, and when—plus feature flags and config changes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="flex gap-4">
+          <span
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-card text-brand"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+              ></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <line x1="10" y1="9" x2="8" y2="9"></line>
+            </svg>
+          </span>
+          <div>
+            <p class="font-semibold text-ink">Logs that matter</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-sub">
+              Correlate structured logs, traces, and metrics in one timeline.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="flex gap-4">
+          <span
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-card text-brand"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <path d="M3 14h7v7H3z"></path>
+            </svg>
+          </span>
+          <div>
+            <p class="font-semibold text-ink">Works with your stack</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-sub">
+              Native integrations with your tools and workflow, out of the box.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="flex gap-4">
+          <span
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-card text-brand"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+          <div>
+            <p class="font-semibold text-ink">Secure by design</p>
+            <p class="mt-1 text-[14px] leading-relaxed text-sub">
+              RBAC, SSO, audit logs, and data residency you can rely on.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="mx-auto mt-14 max-w-shell px-6">
+    <div class="grid grid-cols-2 rounded-xl2 border border-line bg-card md:grid-cols-4">
+      <div class="border-b border-r border-line p-7 text-center md:border-b-0">
+        <p class="text-[30px] font-extrabold">2.3M+</p>
+        <p class="mt-1 text-[14px] text-sub">Incidents analyzed</p>
+      </div>
+      <div class="border-b border-line p-7 text-center md:border-b-0 md:border-r">
+        <p class="text-[30px] font-extrabold">150K+</p>
+        <p class="mt-1 text-[14px] text-sub">Developers using TraceLens</p>
+      </div>
+      <div class="border-r border-line p-7 text-center">
+        <p class="text-[30px] font-extrabold">90%</p>
+        <p class="mt-1 text-[14px] text-sub">Faster time to resolution</p>
+      </div>
+      <div class="p-7 text-center">
+        <p class="text-[30px] font-extrabold">98.7%</p>
+        <p class="mt-1 text-[14px] text-sub">Customer satisfaction</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON + TESTIMONIAL -->
+  <section class="mx-auto mt-16 max-w-shell px-6">
+    <h2 class="text-[26px] font-bold">Why teams choose TraceLens</h2>
+    <div class="mt-6 grid gap-10 lg:grid-cols-[1fr_360px]">
+      <table class="w-full text-[14px]">
+        <thead>
+          <tr class="border-b border-line text-center text-sub">
+            <th class="py-3 text-left font-normal"></th>
+            <th class="py-3 font-semibold text-brand">TraceLens</th>
+            <th class="py-3 font-medium text-ink">Datadog</th>
+            <th class="py-3 font-medium text-ink">New Relic</th>
+            <th class="py-3 font-medium text-ink">Splunk</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-line">
+          <tr>
+            <td class="py-3">Built for developers</td>
+            <td class="text-center text-brand">✓</td>
+            <td class="text-center text-mut">—</td>
+            <td class="text-center text-mut">—</td>
+            <td class="text-center text-mut">—</td>
+          </tr>
+          <tr>
+            <td class="py-3">Root cause in minutes</td>
+            <td class="text-center text-brand">✓</td>
+            <td class="text-center text-mut">△</td>
+            <td class="text-center text-mut">△</td>
+            <td class="text-center text-mut">—</td>
+          </tr>
+          <tr>
+            <td class="py-3">Correlate changes automatically</td>
+            <td class="text-center text-brand">✓</td>
+            <td class="text-center text-mut">—</td>
+            <td class="text-center text-mut">△</td>
+            <td class="text-center text-mut">—</td>
+          </tr>
+          <tr>
+            <td class="py-3">Easy to set up</td>
+            <td class="text-center text-brand">✓</td>
+            <td class="text-center text-mut">△</td>
+            <td class="text-center text-mut">△</td>
+            <td class="text-center text-mut">—</td>
+          </tr>
+          <tr>
+            <td class="py-3">Transparent pricing</td>
+            <td class="text-center text-brand">✓</td>
+            <td class="text-center text-mut">—</td>
+            <td class="text-center text-mut">—</td>
+            <td class="text-center text-mut">—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="lg:border-l lg:border-line lg:pl-10">
+        <p class="font-serif text-[40px] leading-none text-brand">”</p>
+        <p class="mt-2 text-[18px] font-semibold leading-relaxed">
+          "TraceLens cut our incident resolution time by more than 70%. It's like having a senior
+          engineer on every incident."
+        </p>
+        <div class="mt-5 flex items-center gap-3">
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-brandsoft font-semibold text-brand"
+            >AP</span
+          >
+          <div class="text-[14px]">
+            <p class="font-semibold">Arjun Patel</p>
+            <p class="text-sub">Staff Engineer, Ramp</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING STRIP -->
+  <section class="mx-auto mt-16 max-w-shell px-6">
+    <div
+      class="grid items-center gap-8 border-t border-line pt-10 lg:grid-cols-[1fr_repeat(3,180px)_auto]"
+    >
+      <div>
+        <h3 class="text-[22px] font-bold">Simple, transparent pricing</h3>
+        <p class="mt-1 text-[14px] text-sub">Pay for what you use. No hidden fees.</p>
+      </div>
+      <div class="text-center lg:border-l lg:border-line">
+        <p class="font-semibold">Hobby</p>
+        <p class="mt-1 text-[14px] text-sub">Free forever</p>
+        <p class="text-[13px] text-mut">Up to 1M events/month</p>
+      </div>
+      <div class="text-center lg:border-l lg:border-line">
+        <p class="font-semibold">Team</p>
+        <p class="mt-1 text-[14px] text-sub">$25 / month</p>
+        <p class="text-[13px] text-mut">Per user, billed annually</p>
+      </div>
+      <div class="text-center lg:border-l lg:border-line">
+        <p class="font-semibold">Enterprise</p>
+        <p class="mt-1 text-[14px] text-sub">Custom</p>
+        <p class="text-[13px] text-mut">For large teams</p>
+      </div>
+      <a
+        routerLink="/pricing"
+        class="flex items-center gap-1.5 text-[14px] font-medium text-brand lg:justify-end"
+        >View full pricing <i data-lucide="arrow-right" class="h-4 w-4"></i
+      ></a>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="mx-auto mt-16 max-w-shell border-t border-line px-6 py-14 text-center">
+    <h2 class="text-[26px] font-bold">Resolve incidents faster. Ship with confidence.</h2>
+    <form
+      class="mt-6 flex flex-wrap items-center justify-center gap-3"
+      (submit)="$event.preventDefault()"
+    >
+      <input
+        type="email"
+        placeholder="Work email"
+        class="h-[46px] w-[250px] rounded-lg border border-line bg-card px-4 text-[15px] outline-none placeholder:text-mut focus:border-brand"
+      />
+      <button
+        routerLink="/signin"
+        class="h-[46px] rounded-lg bg-brand px-5 text-[15px] font-semibold text-white hover:bg-[#dd451a]"
+      >
+        Start your free trial
+      </button>
+      <a
+        routerLink="#"
+        (click)="$event.preventDefault()"
+        class="flex h-[46px] items-center gap-2 rounded-lg border border-line bg-card px-4 text-[15px] font-medium hover:border-ink/30"
+        ><i data-lucide="calendar" class="h-4 w-4"></i>Book a demo</a
+      >
+    </form>
+    <p class="mt-3 text-[13px] text-sub">14-day free trial &nbsp;•&nbsp; No credit card required</p>
+  </section>
+</main>

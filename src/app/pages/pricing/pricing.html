@@ -1,0 +1,136 @@
+<main class="mx-auto max-w-shell px-6 pt-14 pb-16">
+  <div class="text-center">
+    <h1 class="text-[46px] font-extrabold leading-tight">Simple, transparent pricing</h1>
+    <p class="mt-3 text-[17px] text-sub">Choose the plan that fits your team. Upgrade or downgrade at any time.</p>
+
+    <div class="mt-8 flex items-center justify-center gap-4 text-[15px]">
+      <span class="font-medium">Monthly</span>
+      <button aria-label="Toggle billing period" class="flex h-8 w-[60px] items-center rounded-full border border-line bg-card px-1">
+        <span class="h-6 w-6 rounded-full bg-ink"></span>
+      </button>
+      <span class="text-sub">Annual</span>
+      <span class="rounded-md bg-brandsoft px-2 py-1 font-mono text-[12px] font-medium text-brand">Save 20%</span>
+    </div>
+  </div>
+
+  <!-- PLANS -->
+  <div class="mt-10 grid items-start gap-6 lg:grid-cols-3">
+    <div class="rounded-xl2 border border-line bg-card p-7">
+      <p class="font-mono text-[12px] uppercase tracking-wider text-sub">Starter</p>
+      <p class="mt-3 text-[34px] font-extrabold">Free</p>
+      <p class="mt-2 text-[14px] leading-relaxed text-sub">For individual developers exploring better debugging.</p>
+      <a routerLink="/signin" class="mt-6 block rounded-lg border border-line py-3 text-center text-[15px] font-semibold hover:border-ink/30">Get started</a>
+      <div class="my-6 h-px bg-line"></div>
+      <ul class="space-y-3 font-mono text-[13.5px]">
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>1 user</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>5,000 events / month</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>3 days data retention</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Error &amp; performance monitoring</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Trace search &amp; filtering</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Basic dashboards</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Community support</li>
+      </ul>
+    </div>
+
+    <div class="rounded-xl2 border-2 border-brand bg-card p-7">
+      <div class="flex items-start justify-between">
+        <p class="font-mono text-[12px] uppercase tracking-wider text-sub">Pro</p>
+        <span class="rounded-md bg-brand px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-white">Most popular</span>
+      </div>
+      <p class="mt-3"><span class="text-[34px] font-extrabold">$29</span> <span class="font-mono text-[14px] text-sub">/ user / month</span></p>
+      <p class="mt-2 text-[14px] leading-relaxed text-sub">For professional teams building and shipping reliable software.</p>
+      <a routerLink="/signin" class="mt-6 block rounded-lg bg-brand py-3 text-center text-[15px] font-semibold text-white hover:bg-[#dd451a]">Start free trial</a>
+      <p class="mt-2 text-center text-[12.5px] text-sub">14-day free trial. No credit card required.</p>
+      <div class="my-6 h-px bg-line"></div>
+      <ul class="space-y-3 font-mono text-[13.5px]">
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Everything in Starter</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>50,000 events / user / month</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>30 days data retention</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Advanced trace search</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Custom views &amp; alerts</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Service maps &amp; dependencies</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Issue correlation</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Priority support</li>
+      </ul>
+    </div>
+
+    <div class="rounded-xl2 border border-line bg-card p-7">
+      <p class="font-mono text-[12px] uppercase tracking-wider text-sub">Enterprise</p>
+      <p class="mt-3 text-[34px] font-extrabold">Custom</p>
+      <p class="mt-2 text-[14px] leading-relaxed text-sub">For organizations with advanced needs and scale.</p>
+      <a routerLink="#" class="mt-6 block rounded-lg border border-line py-3 text-center text-[15px] font-semibold hover:border-ink/30">Contact sales</a>
+      <div class="my-6 h-px bg-line"></div>
+      <ul class="space-y-3 font-mono text-[13.5px]">
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Everything in Pro</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Custom event volume</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Custom data retention</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>SSO (SAML / OIDC)</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Role-based access control</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Audit logs &amp; compliance</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>On-premise / VPC deployment</li>
+        <li class="flex gap-3"><i data-lucide="check" class="h-4 w-4 text-brand"></i>Dedicated support &amp; onboarding</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="mt-12 overflow-hidden rounded-xl2 border border-line bg-card">
+    <table class="w-full text-[14px]">
+      <thead>
+        <tr class="border-b border-line bg-[#FAFAF9] font-mono text-[12px] uppercase tracking-wider text-sub">
+          <th class="px-5 py-3.5 text-left font-medium">Features</th>
+          <th class="px-5 py-3.5 text-center font-medium">Starter</th>
+          <th class="px-5 py-3.5 text-center font-medium">Pro</th>
+          <th class="px-5 py-3.5 text-center font-medium">Enterprise</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-line font-mono text-[13.5px]">
+        <tr><td class="px-5 py-3 font-sans">Events / month</td><td class="text-center">5,000</td><td class="text-center">50,000 / user</td><td class="text-center">Custom</td></tr>
+        <tr><td class="px-5 py-3 font-sans">Data retention</td><td class="text-center">3 days</td><td class="text-center">30 days</td><td class="text-center">Custom</td></tr>
+        <tr><td class="px-5 py-3 font-sans">Users</td><td class="text-center">1</td><td class="text-center">Unlimited</td><td class="text-center">Unlimited</td></tr>
+        <tr><td class="px-5 py-3 font-sans">Trace search &amp; filtering</td><td class="text-center text-brand">✓</td><td class="text-center text-brand">✓</td><td class="text-center text-brand">✓</td></tr>
+        <tr><td class="px-5 py-3 font-sans">Advanced trace search</td><td class="text-center text-mut">—</td><td class="text-center text-brand">✓</td><td class="text-center text-brand">✓</td></tr>
+        <tr><td class="px-5 py-3 font-sans">Service maps &amp; dependencies</td><td class="text-center text-mut">—</td><td class="text-center text-brand">✓</td><td class="text-center text-brand">✓</td></tr>
+        <tr><td class="px-5 py-3 font-sans">Custom views &amp; alerts</td><td class="text-center text-mut">—</td><td class="text-center text-brand">✓</td><td class="text-center text-brand">✓</td></tr>
+        <tr><td class="px-5 py-3 font-sans">SSO (SAML / OIDC)</td><td class="text-center text-mut">—</td><td class="text-center text-mut">—</td><td class="text-center text-brand">✓</td></tr>
+        <tr><td class="px-5 py-3 font-sans">Audit logs</td><td class="text-center text-mut">—</td><td class="text-center text-mut">—</td><td class="text-center text-brand">✓</td></tr>
+        <tr><td class="px-5 py-3 font-sans">On-premise / VPC deployment</td><td class="text-center text-mut">—</td><td class="text-center text-mut">—</td><td class="text-center text-brand">✓</td></tr>
+        <tr><td class="px-5 py-3 font-sans">Support</td><td class="text-center">Community</td><td class="text-center">Priority</td><td class="text-center">Dedicated</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="mt-14 text-center text-[26px] font-bold">Frequently asked questions</h2>
+  <div class="mx-auto mt-6 max-w-[1000px] space-y-3">
+    <details class="group rounded-xl2 border border-line bg-card px-5 py-4">
+      <summary class="flex cursor-pointer list-none items-center justify-between text-[15px] font-semibold">Can I change plans later? <i data-lucide="plus" class="h-4 w-4 text-mut group-open:hidden"></i><i data-lucide="minus" class="hidden h-4 w-4 text-mut group-open:block"></i></summary>
+      <p class="mt-3 text-[14px] leading-relaxed text-sub">Yes. Upgrade or downgrade at any time — changes are prorated on your next invoice.</p>
+    </details>
+    <details class="group rounded-xl2 border border-line bg-card px-5 py-4">
+      <summary class="flex cursor-pointer list-none items-center justify-between text-[15px] font-semibold">What happens if I exceed my event limit? <i data-lucide="plus" class="h-4 w-4 text-mut group-open:hidden"></i><i data-lucide="minus" class="hidden h-4 w-4 text-mut group-open:block"></i></summary>
+      <p class="mt-3 text-[14px] leading-relaxed text-sub">Ingestion keeps working. Overage is billed per additional 100k events, and you can set a hard cap per project.</p>
+    </details>
+    <details class="group rounded-xl2 border border-line bg-card px-5 py-4">
+      <summary class="flex cursor-pointer list-none items-center justify-between text-[15px] font-semibold">Is my data secure? <i data-lucide="plus" class="h-4 w-4 text-mut group-open:hidden"></i><i data-lucide="minus" class="hidden h-4 w-4 text-mut group-open:block"></i></summary>
+      <p class="mt-3 text-[14px] leading-relaxed text-sub">Data is encrypted in transit and at rest. Only diff hunks relevant to a suspect commit are read, and they are never used for model training.</p>
+    </details>
+    <details class="group rounded-xl2 border border-line bg-card px-5 py-4">
+      <summary class="flex cursor-pointer list-none items-center justify-between text-[15px] font-semibold">Do you offer self-hosted deployment? <i data-lucide="plus" class="h-4 w-4 text-mut group-open:hidden"></i><i data-lucide="minus" class="hidden h-4 w-4 text-mut group-open:block"></i></summary>
+      <p class="mt-3 text-[14px] leading-relaxed text-sub">Yes, on the Enterprise plan — on-premise or in your own VPC, with data residency options.</p>
+    </details>
+  </div>
+
+  <!-- CTA -->
+  <section class="mt-12 flex flex-wrap items-center gap-6 rounded-xl2 border border-line bg-card p-8">
+    <span class="flex h-14 w-14 items-center justify-center rounded-xl border border-line"><i data-lucide="code-2" class="h-6 w-6 text-brand"></i></span>
+    <div>
+      <h3 class="text-[20px] font-bold">Ready to ship more reliable software?</h3>
+      <p class="mt-1 text-[14px] text-sub">Join thousands of developers using TraceLens to debug faster.</p>
+    </div>
+    <div class="ml-auto text-right">
+      <a routerLink="/signin" class="inline-block rounded-lg bg-brand px-6 py-3 text-[15px] font-semibold text-white hover:bg-[#dd451a]">Start free trial</a>
+      <p class="mt-2 text-[13px] text-sub">14-day free trial. No credit card required.</p>
+    </div>
+  </section>
+</main>

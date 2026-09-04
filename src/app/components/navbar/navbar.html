@@ -1,0 +1,26 @@
+<header class="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
+  <div class="mx-auto flex h-[72px] max-w-shell items-center px-6">
+    
+    <!-- Logo (Points to Home) -->
+    <a routerLink="/" class="flex items-center" aria-label="Go to home">
+      <img src="/sources/images/tracelens-logo-wordmark.svg" alt="TraceLens" class="h-[34px] w-[190px] object-contain" />
+    </a>
+
+    <!-- Center Navigation Links (Hidden unnecessary pages) -->
+    <nav class="mx-auto hidden items-center gap-9 text-[15px] text-ink md:flex">
+      <a class="navlink" routerLink="/product" routerLinkActive="active">Product</a>
+      <a class="navlink" routerLink="/about" routerLinkActive="active">About</a>
+    </nav>
+
+    <!-- Right Side Actions (Sign In + Dashboard) -->
+    <div class="flex items-center gap-3">
+      <a routerLink="/signin" class="hidden md:flex rounded-lg px-4 py-2 text-[15px] font-medium text-ink hover:bg-[#F5F5F4] transition-colors">
+        Sign In
+      </a>
+      <a routerLink="/dashboard" class="rounded-lg border border-brand bg-brand px-4 py-2 text-[15px] font-medium text-white shadow-sm hover:bg-[#dd451a] transition-colors">
+        Dashboard
+      </a>
+    </div>
+
+  </div>
+</header>

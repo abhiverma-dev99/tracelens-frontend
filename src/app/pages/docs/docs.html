@@ -1,0 +1,168 @@
+<div class="mx-auto grid max-w-[1400px] grid-cols-1 lg:grid-cols-[270px_minmax(0,1fr)_260px]">
+  <!-- SIDEBAR -->
+  <aside class="hidden border-r border-line px-6 py-8 lg:block">
+    <div class="flex h-[42px] items-center gap-2.5 rounded-lg border border-line bg-card px-3">
+      <i data-lucide="search" class="h-4 w-4 text-mut"></i>
+      <input placeholder="Search docs" class="h-full w-full bg-transparent text-[14px] outline-none placeholder:text-mut" />
+      <span class="rounded border border-line px-1.5 font-mono text-[11px] text-mut">⌘K</span>
+    </div>
+
+    <nav class="mt-8 space-y-8 text-[14px]">
+      <div>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Getting Started</p>
+        <ul class="mt-3 space-y-2.5">
+          <li><a class="-ml-4 block border-l-2 border-brand pl-4 font-medium text-brand" routerLink="#">Quickstart</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Concepts</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Architecture</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">What's New</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Installation</p>
+        <ul class="mt-3 space-y-2.5">
+          <li><a class="text-sub hover:text-ink" routerLink="#">System Requirements</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Install TraceLens</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Verify Installation</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Configuration</p>
+        <ul class="mt-3 space-y-2.5">
+          <li><a class="text-sub hover:text-ink" routerLink="#">Project Setup</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Environments</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Filters &amp; Sampling</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Data Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">SDKs</p>
+        <ul class="mt-3 space-y-2.5">
+          <li><a class="text-sub hover:text-ink" routerLink="#">Node.js</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Python</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Go</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Java</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">.NET</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">API Reference</p>
+        <ul class="mt-3 space-y-2.5">
+          <li><a class="text-sub hover:text-ink" routerLink="#">Authentication</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Endpoints</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Rate Limits</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Errors</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Webhooks</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Best Practices</p>
+        <ul class="mt-3 space-y-2.5">
+          <li><a class="text-sub hover:text-ink" routerLink="#">Instrument Effectively</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Debug Faster</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Performance</a></li>
+          <li><a class="text-sub hover:text-ink" routerLink="#">Security</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <main class="px-8 py-8">
+    <p class="text-[14px] text-sub">Getting Started &nbsp;›&nbsp; <span class="text-brand">Quickstart</span></p>
+    <h1 class="mt-4 text-[46px] font-extrabold leading-none">Quickstart</h1>
+    <p class="mt-4 max-w-[640px] text-[16px] leading-relaxed text-sub">Get TraceLens up and running in a few minutes. Instrument your application, send your first event, and view it in the TraceLens dashboard.</p>
+    <div class="my-7 h-px bg-line"></div>
+
+    <section class="space-y-8 max-w-[680px]">
+      <div>
+        <h2 class="flex items-center gap-3 text-[19px] font-bold"><span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand font-mono text-[12px] text-white">1</span>Create a project</h2>
+        <p class="mt-2 pl-9 text-[15px] leading-relaxed text-sub">Create a new project in the <a routerLink="/dashboard" class="text-brand underline underline-offset-2">TraceLens dashboard</a> to get your Project ID and Ingest Key.</p>
+      </div>
+
+      <div>
+        <h2 class="flex items-center gap-3 text-[19px] font-bold"><span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand font-mono text-[12px] text-white">2</span>Install the SDK</h2>
+        <p class="mt-2 pl-9 text-[15px] leading-relaxed text-sub">Install the TraceLens SDK for your platform.</p>
+        <div class="mt-3 ml-9 overflow-hidden rounded-xl border border-line">
+          <div class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70">
+            bash <i data-lucide="copy" class="h-3.5 w-3.5"></i>
+          </div>
+          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white"><span class="text-white/40"># Node.js</span>
+npm install @tracelens/node</pre>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="flex items-center gap-3 text-[19px] font-bold"><span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand font-mono text-[12px] text-white">3</span>Initialize the SDK</h2>
+        <p class="mt-2 pl-9 text-[15px] leading-relaxed text-sub">Initialize the SDK with your Project ID and Ingest Key.</p>
+        <div class="mt-3 ml-9 overflow-hidden rounded-xl border border-line">
+          <div class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70">
+            typescript <i data-lucide="copy" class="h-3.5 w-3.5"></i>
+          </div>
+          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white"><span class="text-white/30">1</span>  <span class="text-[#C792EA]">import</span> {{ '{' }} TraceLens {{ '}' }} <span class="text-[#C792EA]">from</span> <span class="text-[#7CD992]">'@tracelens/node'</span>;
+<span class="text-white/30">2</span>
+<span class="text-white/30">3</span>  TraceLens.init({{ '{' }}
+<span class="text-white/30">4</span>    projectId: <span class="text-[#7CD992]">'proj_1234567890abcdef'</span>,
+<span class="text-white/30">5</span>    ingestKey: <span class="text-[#7CD992]">'ingest_1234567890abcdef'</span>,
+<span class="text-white/30">6</span>    environment: <span class="text-[#7CD992]">'production'</span>,
+<span class="text-white/30">7</span>  {{ '}' }});</pre>
+        </div>
+        <div class="mt-4 ml-9 flex gap-3 rounded-xl border border-brand/30 bg-brandsoft p-4">
+          <i data-lucide="info" class="h-5 w-5 shrink-0 text-brand"></i>
+          <div class="text-[14.5px]">
+            <p class="font-semibold">Keep your Ingest Key secure.</p>
+            <p class="mt-1 text-sub">Do not expose it in client-side code or public repositories.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="flex items-center gap-3 text-[19px] font-bold"><span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand font-mono text-[12px] text-white">4</span>Send your first event</h2>
+        <p class="mt-2 pl-9 text-[15px] leading-relaxed text-sub">Capture and send an event.</p>
+        <div class="mt-3 ml-9 overflow-hidden rounded-xl border border-line">
+          <div class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70">
+            typescript <i data-lucide="copy" class="h-3.5 w-3.5"></i>
+          </div>
+          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white"><span class="text-white/30">1</span>  TraceLens.<span class="text-[#82AAFF]">capture</span>(<span class="text-[#7CD992]">'user.login'</span>, {{ '{' }}
+<span class="text-white/30">2</span>    userId: <span class="text-[#7CD992]">'user_123'</span>,
+<span class="text-white/30">3</span>    method: <span class="text-[#7CD992]">'password'</span>,
+<span class="text-white/30">4</span>    success: <span class="text-[#F78C6C]">true</span>,
+<span class="text-white/30">5</span>    latencyMs: <span class="text-[#F78C6C]">142</span>,
+<span class="text-white/30">6</span>  {{ '}' }});</pre>
+        </div>
+        <p class="mt-3 ml-9 text-[15px] text-sub">View the event in the <a routerLink="/dashboard" class="text-brand underline underline-offset-2">TraceLens dashboard</a> within a few seconds.</p>
+      </div>
+    </section>
+
+    <h2 class="mt-12 text-[22px] font-bold">SDK initialization parameters</h2>
+    <div class="mt-4 max-w-[680px] overflow-hidden rounded-xl border border-line bg-card">
+      <table class="w-full text-[14px]">
+        <thead>
+          <tr class="border-b border-line bg-[#FAFAF9] text-left text-sub">
+            <th class="px-4 py-3 font-medium">Parameter</th><th class="px-4 py-3 font-medium">Type</th>
+            <th class="px-4 py-3 font-medium">Required</th><th class="px-4 py-3 font-medium">Description</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-line">
+          <tr><td class="px-4 py-3"><code class="rounded bg-[#F5F5F4] px-1.5 py-0.5 font-mono text-[13px]">projectId</code></td><td class="px-4 py-3">string</td><td class="px-4 py-3">Yes</td><td class="px-4 py-3 text-sub">Your TraceLens Project ID.</td></tr>
+          <tr><td class="px-4 py-3"><code class="rounded bg-[#F5F5F4] px-1.5 py-0.5 font-mono text-[13px]">ingestKey</code></td><td class="px-4 py-3">string</td><td class="px-4 py-3">Yes</td><td class="px-4 py-3 text-sub">Your TraceLens Ingest Key.</td></tr>
+          <tr><td class="px-4 py-3"><code class="rounded bg-[#F5F5F4] px-1.5 py-0.5 font-mono text-[13px]">environment</code></td><td class="px-4 py-3">string</td><td class="px-4 py-3">No</td><td class="px-4 py-3 text-sub">The environment name (e.g., production).</td></tr>
+          <tr><td class="px-4 py-3"><code class="rounded bg-[#F5F5F4] px-1.5 py-0.5 font-mono text-[13px]">release</code></td><td class="px-4 py-3">string</td><td class="px-4 py-3">No</td><td class="px-4 py-3 text-sub">The application release version.</td></tr>
+          <tr><td class="px-4 py-3"><code class="rounded bg-[#F5F5F4] px-1.5 py-0.5 font-mono text-[13px]">sampleRate</code></td><td class="px-4 py-3">number</td><td class="px-4 py-3">No</td><td class="px-4 py-3 text-sub">Event sample rate from 0 to 1 (default: 1).</td></tr>
+          <tr><td class="px-4 py-3"><code class="rounded bg-[#F5F5F4] px-1.5 py-0.5 font-mono text-[13px]">debug</code></td><td class="px-4 py-3">boolean</td><td class="px-4 py-3">No</td><td class="px-4 py-3 text-sub">Enable debug logging.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- ON THIS PAGE -->
+  <aside class="hidden px-6 py-8 lg:block">
+    <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">On this page</p>
+    <ul class="mt-4 space-y-3 text-[14px]">
+      <li><a class="text-sub hover:text-ink" routerLink="#">Create a project</a></li>
+      <li><a class="text-sub hover:text-ink" routerLink="#">Install the SDK</a></li>
+      <li><a class="text-sub hover:text-ink" routerLink="#">Initialize the SDK</a></li>
+      <li><a class="text-sub hover:text-ink" routerLink="#">Send your first event</a></li>
+      <li><a class="text-sub hover:text-ink" routerLink="#">SDK initialization parameters</a></li>
+    </ul>
+  </aside>
+</div>

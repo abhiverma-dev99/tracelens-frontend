@@ -1,0 +1,27 @@
+/* Angular Active Route Styling */
+.navlink { 
+  position: relative; 
+  padding-bottom: 6px; 
+  transition: color 0.2s;
+}
+
+.navlink::after {
+  content: ""; 
+  position: absolute; 
+  left: 0; right: 0; bottom: 0;
+  height: 2px; 
+  background: var(--color-brand);
+  transform: scaleX(0); 
+  transform-origin: left; 
+  transition: transform 0.3s ease; 
+}
+
+/* Ensure the active state holds the underline */
+.navlink.active, .navlink:active { 
+  color: var(--color-brand); 
+}
+
+.navlink.active::after,
+.navlink:hover::after {
+  transform: scaleX(1); 
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="120" viewBox="0 0 560 120" preserveAspectRatio="xMidYMid meet" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&amp;display=swap');
+      .wordmark { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 76px; letter-spacing: -0.045em; }
+    </style>
+  </defs>
+
+  <!-- T trace: starts from top-right of T, runs down and right -->
+  <path d="M70 34 L70 50 L106 50 L132 76" stroke="#F4511E" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="132" cy="76" r="5.5" fill="#FAF9F7" stroke="#F4511E" stroke-width="3"/>
+
+  <!-- L trace: starts from bottom of L, runs right and up -->
+  <path d="M316 86 L316 70 L352 70 L378 44" stroke="#F4511E" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="378" cy="44" r="5.5" fill="#FAF9F7" stroke="#F4511E" stroke-width="3"/>
+
+  <!-- Wordmark -->
+  <text x="64" y="88" class="wordmark" fill="#0F0F0F">TraceLens</text>
+</svg>

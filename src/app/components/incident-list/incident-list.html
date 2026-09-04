@@ -1,0 +1,301 @@
+<div class="fixed inset-0 z-50 grid min-h-screen grid-cols-1 bg-paper text-ink lg:grid-cols-[280px_minmax(0,1fr)_auto]">
+  <!-- SIDEBAR -->
+  <aside class="hidden flex-col border-r border-line bg-card lg:flex w-[280px]">
+    <div class="flex h-[86px] items-center border-b border-line px-6">
+      <a routerLink="/" class="flex items-center" aria-label="Go to home">
+        <img
+          src="/sources/images/tracelens-logo-wordmark.svg"
+          alt="TraceLens"
+          class="h-[34px] w-[190px] object-contain"
+        />
+      </a>
+    </div>
+
+    <!-- Removed Dropdown and Copy Icon Section Here -->
+
+    <nav class="mt-8 space-y-1 px-3 text-[15px]">
+      <a
+        class="flex items-center gap-3 rounded-lg border-l-2 border-brand bg-brandsoft px-3 py-2.5 font-medium text-brand"
+        routerLink="/dashboard"
+      >
+        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        Incidents
+      </a>
+    </nav>
+
+    <div class="mt-6 border-t border-line px-5 pt-5">
+      <div class="flex items-center justify-between">
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Filter by service</p>
+        <svg class="h-4 w-4 text-mut" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+      <ul class="mt-4 space-y-3.5 text-[14.5px]">
+        @for (svc of serviceCounts(); track svc.name) {
+          <li class="flex items-center gap-3">
+            <input
+              type="checkbox"
+              [checked]="selectedServices().has(svc.name)"
+              (change)="onServiceToggle(svc.name, $event)"
+              class="h-[18px] w-[18px] rounded border-line accent-[#F4511E]"
+            />
+            <span class="flex-1">{{ svc.name }}</span>
+            <span class="font-mono text-[13px] text-sub">{{ svc.count }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="mt-6 border-t border-line px-5 pt-5 pb-5">
+      <div class="flex items-center justify-between">
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Recent Pushes</p>
+      </div>
+      <ul class="mt-4 space-y-3.5 text-[13.5px]">
+        @for (dep of deployments(); track dep.id) {
+          <li class="flex flex-col gap-0.5">
+            <span class="font-medium text-ink truncate">{{ dep.message }}</span>
+            <span class="font-mono text-[11.5px] text-sub">
+              {{ dep.author }} • {{ dep.commitHash }}
+            </span>
+          </li>
+        } @empty {
+          <li class="text-sub text-[13px]">No recent deployments</li>
+        }
+      </ul>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="min-w-0 border-r border-line overflow-y-auto h-screen">
+    <div class="px-7 py-8">
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex h-[46px] min-w-[300px] flex-1 items-center gap-3 rounded-lg border border-line bg-card px-4 focus-within:border-brand">
+          <svg class="h-4 w-4 text-mut shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            (input)="onSearch($event)"
+            [value]="searchQuery()"
+            placeholder="Search incidents, services, error messages..."
+            class="h-full w-full bg-transparent text-[14.5px] outline-none placeholder:text-mut"
+          />
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center gap-3">
+        <select
+          (change)="onStatusChange($event)"
+          class="flex items-center gap-2 rounded-lg border border-line bg-card px-3 py-2 font-mono text-[13px] outline-none"
+        >
+          <option value="ALL">Status: All</option>
+          <option value="OPEN">Status: Open</option>
+          <option value="RESOLVED">Status: Resolved</option>
+        </select>
+      </div>
+
+      <!-- KPIs -->
+      <div class="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="rounded-xl2 border border-line bg-card p-5">
+          <p class="text-[14px] text-sub">Total Matching</p>
+          <p class="mt-2 text-[30px] font-extrabold">{{ totalItems() }}</p>
+        </div>
+        <div class="rounded-xl2 border border-line bg-card p-5">
+          <p class="text-[14px] text-sub">Errors / min</p>
+          <p class="mt-2 text-[30px] font-extrabold">{{ errorsPerMinute() }}</p>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <div class="mt-8 overflow-hidden rounded-xl2 border border-line bg-card">
+        <div class="flex items-center gap-3 border-b border-line px-5 py-4">
+          <h2 class="text-[16px] font-semibold">Incidents</h2>
+        </div>
+
+        <div class="overflow-x-auto thin-scroll min-h-[300px]">
+          <table class="w-full min-w-[880px] text-[14px]">
+            <thead>
+              <tr class="border-b border-line text-left text-sub">
+                <th class="px-5 py-3 font-medium">Severity</th>
+                <th class="px-3 py-3 font-medium">Incident</th>
+                <th class="px-3 py-3 font-medium">Service</th>
+                <th class="px-3 py-3 font-medium">Status</th>
+                <th class="px-3 py-3 font-medium">Started</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-line">
+              @if (isFetching()) {
+                <tr>
+                  <td colspan="5" class="py-8 text-center text-mut animate-pulse">
+                    Loading incidents...
+                  </td>
+                </tr>
+              } @else {
+                @for (incident of incidents(); track incident.id) {
+                  <tr
+                    (click)="selectIncident(incident)"
+                    class="cursor-pointer transition-colors hover:bg-gray-50"
+                    [class.bg-[#FFFAF8]]="selectedIncident()?.id === incident.id"
+                  >
+                    <td class="px-5 py-3.5">
+                      <span class="flex items-center gap-2">
+                        <span class="h-2 w-2 rounded-full bg-err"></span>Critical
+                      </span>
+                    </td>
+                    <td class="px-3 py-3.5">
+                      <p class="font-medium text-ink truncate max-w-[250px]">{{ incident.message }}</p>
+                      <p class="font-mono text-[12.5px] text-sub">INC-{{ incident.id | slice: 0 : 6 | uppercase }}</p>
+                    </td>
+                    <td class="px-3 py-3.5 text-sub font-mono text-[12.5px]">{{ incident.service }}</td>
+                    <td class="px-3 py-3.5">
+                      <span
+                        [class]="
+                          incident.status === 'RESOLVED'
+                            ? 'rounded-md border border-green-500/20 bg-green-50 px-2 py-1 font-mono text-[12.5px] text-green-600'
+                            : 'rounded-md border border-brand/20 bg-brandsoft px-2 py-1 font-mono text-[12.5px] text-brand'
+                        "
+                      >{{ incident.status || 'OPEN' }}</span>
+                    </td>
+                    <td class="px-3 py-3.5">
+                      <p>{{ incident.createdAt | date: 'MMM d, h:mm a' }}</p>
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="5" class="py-12 text-center text-sub">
+                      No incidents match your filters.
+                    </td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-between border-t border-line px-5 py-4 text-[14px]">
+          <div class="flex items-center gap-2">
+            <button
+              (click)="prevPage()"
+              [disabled]="currentPage() === 1"
+              class="flex h-8 w-8 items-center justify-center rounded-lg border border-line disabled:opacity-50 bg-card hover:bg-gray-50"
+            >
+              <svg class="h-4 w-4 text-sub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button
+              (click)="nextPage()"
+              [disabled]="currentPage() === totalPages() || totalPages() === 0"
+              class="flex h-8 w-8 items-center justify-center rounded-lg border border-line disabled:opacity-50 bg-card hover:bg-gray-50"
+            >
+              <svg class="h-4 w-4 text-sub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <span class="text-sub">Showing {{ startIndex() }}–{{ endIndex() }} of {{ totalItems() }}</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- DETAIL PANEL (Unchanged structurally, just referencing selected properly) -->
+  @if (selectedIncident(); as selected) {
+    <aside class="bg-card w-[390px] flex flex-col h-screen shrink-0 overflow-hidden shadow-[-4px_0_24px_rgba(0,0,0,0.02)]">
+      <div class="flex h-[86px] shrink-0 items-center justify-between border-b border-line px-6">
+        <span class="font-mono text-[14px]">INC-{{ selected.id | slice: 0 : 6 | uppercase }}</span>
+        <div class="flex items-center gap-4 text-mut">
+          <svg (click)="closePanel()" class="h-4 w-4 hover:text-ink cursor-pointer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </div>
+      </div>
+
+      <div class="thin-scroll overflow-y-auto px-6 py-5 flex-1">
+        <p class="flex items-center gap-2 text-[14px] font-medium"><span class="h-2.5 w-2.5 rounded-full bg-err"></span>Critical</p>
+        <h2 class="mt-3 text-[21px] font-bold leading-snug">{{ selected.message }}</h2>
+        <p class="mt-3 flex items-center gap-2 text-[14px] text-sub">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          </svg>
+          {{ selected.service }}
+        </p>
+        <div class="mt-3 flex items-center gap-4">
+          <span [class]="selected.status === 'RESOLVED' ? 'rounded-md border border-green-500/20 bg-green-50 px-2 py-1 font-mono text-[12px] text-green-600' : 'rounded-md border border-brand/20 bg-brandsoft px-2 py-1 font-mono text-[12px] text-brand'">
+            {{ selected.status || 'OPEN' }}
+          </span>
+
+          @if (selected.status !== 'RESOLVED') {
+            <button (click)="resolveIssue(selected.id)" class="text-[13px] text-sub hover:text-ink underline">Mark as resolved</button>
+          }
+        </div>
+
+        <div class="mt-4 flex gap-6 border-b border-line text-[14px] text-sub">
+          <span class="-mb-px border-b-2 border-brand pb-2.5 font-medium text-ink">Details</span>
+        </div>
+
+        <section class="mt-5 rounded-xl2 border border-line">
+          <div class="flex items-center justify-between border-b border-line px-4 py-3">
+            <p class="text-[15px] font-semibold">Stack trace</p>
+          </div>
+          <pre class="overflow-x-auto px-4 py-3 font-mono text-[12px] leading-6 text-ink/85 whitespace-pre-wrap">{{ selected.stackTrace }}</pre>
+        </section>
+
+        @if (selected.aiRootCause) {
+          <section class="mt-5 rounded-xl2 border border-brand/30 bg-brandsoft p-4">
+            <p class="flex items-center gap-2 text-[15px] font-semibold text-brand">
+              <svg class="h-4 w-4 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+              </svg>
+              AI Root Cause
+            </p>
+            <p class="mt-3 text-[14px] leading-relaxed text-ink/85">{{ selected.aiRootCause }}</p>
+          </section>
+
+          <section class="mt-5 rounded-xl2 border border-line">
+            <div class="flex items-center justify-between border-b border-line px-4 py-3">
+              <p class="text-[15px] font-semibold">Suggested fix</p>
+            </div>
+            <div class="px-4 py-3 text-[13px] leading-relaxed text-ink/85 bg-[#FAFAF9] rounded-b-xl2">
+              {{ selected.aiSolution }}
+            </div>
+          </section>
+        } @else {
+          <div class="mt-6 text-center">
+            <button
+              (click)="analyze(selected.id)"
+              [disabled]="loadingStates()[selected.id]"
+              class="w-full flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-3 text-[15px] font-semibold text-white hover:bg-[#dd451a] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              @if (loadingStates()[selected.id]) {
+                <svg class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="2" x2="12" y2="6"></line>
+                  <line x1="12" y1="18" x2="12" y2="22"></line>
+                  <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                  <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                  <line x1="2" y1="12" x2="6" y2="12"></line>
+                  <line x1="18" y1="12" x2="22" y2="12"></line>
+                  <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                  <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                </svg>
+                Analyzing trace...
+              } @else {
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                </svg>
+                Ask AI to explain
+              }
+            </button>
+          </div>
+        }
+      </div>
+    </aside>
+  }
+</div>

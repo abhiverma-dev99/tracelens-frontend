@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#0F0F0F"/>
+
+  <!-- TL monogram -->
+  <text x="18" y="48" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="34" fill="#FAF9F7">T</text>
+  <text x="34" y="48" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="34" fill="#FAF9F7">L</text>
+
+  <!-- Trace line connecting T to L -->
+  <path d="M22 22 L22 28 L34 28 L44 38" stroke="#F4511E" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="44" cy="38" r="3.5" fill="#0F0F0F" stroke="#F4511E" stroke-width="2"/>
+</svg>
