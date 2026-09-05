@@ -26,13 +26,13 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
   searchQuery = signal<string>('');
   selectedStatus = signal<string>('ALL');
   selectedServices = signal<Set<string>>(new Set());
-  
+
   currentPage = signal<number>(1);
   itemsPerPage = signal<number>(20); // Fetches 20 items per API call
   totalItems = signal<number>(0);
   totalPages = signal<number>(1);
-  
-  serviceCounts = signal<{name: string, count: number}[]>([]);
+
+  serviceCounts = signal<{ name: string; count: number }[]>([]);
   deployments = signal<any[]>([]);
 
   projectName = signal<string>(environment.projectName);
@@ -43,14 +43,16 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
     return total > 0 ? (total / 60).toFixed(2) : '0';
   });
 
-  startIndex = computed(() => this.totalItems() === 0 ? 0 : (this.currentPage() - 1) * this.itemsPerPage() + 1);
+  startIndex = computed(() =>
+    this.totalItems() === 0 ? 0 : (this.currentPage() - 1) * this.itemsPerPage() + 1,
+  );
   endIndex = computed(() => Math.min(this.currentPage() * this.itemsPerPage(), this.totalItems()));
 
   constructor(private incidentService: IncidentService) {}
 
   ngOnInit(): void {
     this.fetchIncidents();
-    
+
     this.incidentService.getDeployments().subscribe({
       next: (res) => this.deployments.set(res.data),
     });
@@ -61,10 +63,7 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
     });
 
     // Handle Search Debounce for Performance
-    this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged()
-    ).subscribe(query => {
+    this.searchSubject.pipe(debounceTime(300), distinctUntilChanged()).subscribe((query) => {
       this.searchQuery.set(query);
       this.currentPage.set(1);
       this.fetchIncidents();
@@ -83,12 +82,12 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
 
   fetchIncidents() {
     this.isFetching.set(true);
-    
+
     const params: any = {
       page: this.currentPage(),
       limit: this.itemsPerPage(),
       status: this.selectedStatus(),
-      search: this.searchQuery()
+      search: this.searchQuery(),
     };
 
     if (this.selectedServices().size > 0) {
@@ -114,13 +113,13 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
   onServiceToggle(serviceName: string, event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
     const currentSet = new Set(this.selectedServices());
-    
+
     if (isChecked) {
       currentSet.add(serviceName);
     } else {
       currentSet.delete(serviceName);
     }
-    
+
     this.selectedServices.set(currentSet);
     this.currentPage.set(1);
     this.fetchIncidents();
@@ -144,8 +143,11 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
         if (this.selectedIncident()?.id === id) {
           this.selectedIncident.set(response.data);
         }
-        
-        this.fetchIncidents(); 
+
+        this.incidents.update((currentIncidents) =>
+          currentIncidents.map((inc) => (inc.id === id ? response.data : inc)),
+        );
+
         this.loadingStates.update((states) => ({ ...states, [id]: false }));
       },
       error: (err) => {
@@ -166,7 +168,7 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
         this.fetchIncidents();
         this.selectedIncident.set(null);
       },
-      error: (err) => console.error('Failed to resolve:', err)
+      error: (err) => console.error('Failed to resolve:', err),
     });
   }
 
