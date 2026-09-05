@@ -1,4 +1,6 @@
-<div class="fixed inset-0 z-50 grid min-h-screen grid-cols-1 bg-paper text-ink lg:grid-cols-[280px_minmax(0,1fr)_auto]">
+<div
+  class="fixed inset-0 z-50 grid min-h-screen grid-cols-1 bg-paper text-ink lg:grid-cols-[280px_minmax(0,1fr)_auto]"
+>
   <!-- SIDEBAR -->
   <aside class="hidden flex-col border-r border-line bg-card lg:flex w-[280px]">
     <div class="flex h-[86px] items-center border-b border-line px-6">
@@ -18,8 +20,16 @@
         class="flex items-center gap-3 rounded-lg border-l-2 border-brand bg-brandsoft px-3 py-2.5 font-medium text-brand"
         routerLink="/dashboard"
       >
-        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <svg
+          class="h-[18px] w-[18px]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
+          ></path>
           <line x1="12" y1="9" x2="12" y2="13"></line>
           <line x1="12" y1="17" x2="12.01" y2="17"></line>
         </svg>
@@ -30,7 +40,13 @@
     <div class="mt-6 border-t border-line px-5 pt-5">
       <div class="flex items-center justify-between">
         <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Filter by service</p>
-        <svg class="h-4 w-4 text-mut" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          class="h-4 w-4 text-mut"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
@@ -74,8 +90,16 @@
   <main class="min-w-0 border-r border-line overflow-y-auto h-screen">
     <div class="px-7 py-8">
       <div class="flex flex-wrap items-center gap-3">
-        <div class="flex h-[46px] min-w-[300px] flex-1 items-center gap-3 rounded-lg border border-line bg-card px-4 focus-within:border-brand">
-          <svg class="h-4 w-4 text-mut shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div
+          class="flex h-[46px] min-w-[300px] flex-1 items-center gap-3 rounded-lg border border-line bg-card px-4 focus-within:border-brand"
+        >
+          <svg
+            class="h-4 w-4 text-mut shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
@@ -148,10 +172,16 @@
                       </span>
                     </td>
                     <td class="px-3 py-3.5">
-                      <p class="font-medium text-ink truncate max-w-[250px]">{{ incident.message }}</p>
-                      <p class="font-mono text-[12.5px] text-sub">INC-{{ incident.id | slice: 0 : 6 | uppercase }}</p>
+                      <p class="font-medium text-ink truncate max-w-[250px]">
+                        {{ incident.message }}
+                      </p>
+                      <p class="font-mono text-[12.5px] text-sub">
+                        INC-{{ incident.id | slice: 0 : 6 | uppercase }}
+                      </p>
                     </td>
-                    <td class="px-3 py-3.5 text-sub font-mono text-[12.5px]">{{ incident.service }}</td>
+                    <td class="px-3 py-3.5 text-sub font-mono text-[12.5px]">
+                      {{ incident.service }}
+                    </td>
                     <td class="px-3 py-3.5">
                       <span
                         [class]="
@@ -159,7 +189,8 @@
                             ? 'rounded-md border border-green-500/20 bg-green-50 px-2 py-1 font-mono text-[12.5px] text-green-600'
                             : 'rounded-md border border-brand/20 bg-brandsoft px-2 py-1 font-mono text-[12.5px] text-brand'
                         "
-                      >{{ incident.status || 'OPEN' }}</span>
+                        >{{ incident.status || 'OPEN' }}</span
+                      >
                     </td>
                     <td class="px-3 py-3.5">
                       <p>{{ incident.createdAt | date: 'MMM d, h:mm a' }}</p>
@@ -185,7 +216,13 @@
               [disabled]="currentPage() === 1"
               class="flex h-8 w-8 items-center justify-center rounded-lg border border-line disabled:opacity-50 bg-card hover:bg-gray-50"
             >
-              <svg class="h-4 w-4 text-sub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                class="h-4 w-4 text-sub"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
             </button>
@@ -194,12 +231,20 @@
               [disabled]="currentPage() === totalPages() || totalPages() === 0"
               class="flex h-8 w-8 items-center justify-center rounded-lg border border-line disabled:opacity-50 bg-card hover:bg-gray-50"
             >
-              <svg class="h-4 w-4 text-sub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                class="h-4 w-4 text-sub"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </button>
           </div>
-          <span class="text-sub">Showing {{ startIndex() }}–{{ endIndex() }} of {{ totalItems() }}</span>
+          <span class="text-sub"
+            >Showing {{ startIndex() }}–{{ endIndex() }} of {{ totalItems() }}</span
+          >
         </div>
       </div>
     </div>
@@ -207,11 +252,20 @@
 
   <!-- DETAIL PANEL (Unchanged structurally, just referencing selected properly) -->
   @if (selectedIncident(); as selected) {
-    <aside class="bg-card w-[390px] flex flex-col h-screen shrink-0 overflow-hidden shadow-[-4px_0_24px_rgba(0,0,0,0.02)]">
+    <aside
+      class="bg-card w-[390px] flex flex-col h-screen shrink-0 overflow-hidden shadow-[-4px_0_24px_rgba(0,0,0,0.02)]"
+    >
       <div class="flex h-[86px] shrink-0 items-center justify-between border-b border-line px-6">
         <span class="font-mono text-[14px]">INC-{{ selected.id | slice: 0 : 6 | uppercase }}</span>
         <div class="flex items-center gap-4 text-mut">
-          <svg (click)="closePanel()" class="h-4 w-4 hover:text-ink cursor-pointer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            (click)="closePanel()"
+            class="h-4 w-4 hover:text-ink cursor-pointer"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -219,21 +273,42 @@
       </div>
 
       <div class="thin-scroll overflow-y-auto px-6 py-5 flex-1">
-        <p class="flex items-center gap-2 text-[14px] font-medium"><span class="h-2.5 w-2.5 rounded-full bg-err"></span>Critical</p>
+        <p class="flex items-center gap-2 text-[14px] font-medium">
+          <span class="h-2.5 w-2.5 rounded-full bg-err"></span>Critical
+        </p>
         <h2 class="mt-3 text-[21px] font-bold leading-snug">{{ selected.message }}</h2>
         <p class="mt-3 flex items-center gap-2 text-[14px] text-sub">
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+            ></path>
           </svg>
           {{ selected.service }}
         </p>
         <div class="mt-3 flex items-center gap-4">
-          <span [class]="selected.status === 'RESOLVED' ? 'rounded-md border border-green-500/20 bg-green-50 px-2 py-1 font-mono text-[12px] text-green-600' : 'rounded-md border border-brand/20 bg-brandsoft px-2 py-1 font-mono text-[12px] text-brand'">
+          <span
+            [class]="
+              selected.status === 'RESOLVED'
+                ? 'rounded-md border border-green-500/20 bg-green-50 px-2 py-1 font-mono text-[12px] text-green-600'
+                : 'rounded-md border border-brand/20 bg-brandsoft px-2 py-1 font-mono text-[12px] text-brand'
+            "
+          >
             {{ selected.status || 'OPEN' }}
           </span>
 
           @if (selected.status !== 'RESOLVED') {
-            <button (click)="resolveIssue(selected.id)" class="text-[13px] text-sub hover:text-ink underline">Mark as resolved</button>
+            <button
+              (click)="resolveIssue(selected.id)"
+              class="text-[13px] text-sub hover:text-ink underline"
+            >
+              Mark as resolved
+            </button>
           }
         </div>
 
@@ -245,14 +320,24 @@
           <div class="flex items-center justify-between border-b border-line px-4 py-3">
             <p class="text-[15px] font-semibold">Stack trace</p>
           </div>
-          <pre class="overflow-x-auto px-4 py-3 font-mono text-[12px] leading-6 text-ink/85 whitespace-pre-wrap">{{ selected.stackTrace }}</pre>
+          <pre
+            class="overflow-x-auto px-4 py-3 font-mono text-[12px] leading-6 text-ink/85 whitespace-pre-wrap"
+            >{{ selected.stackTrace }}</pre>
         </section>
 
         @if (selected.aiRootCause) {
           <section class="mt-5 rounded-xl2 border border-brand/30 bg-brandsoft p-4">
             <p class="flex items-center gap-2 text-[15px] font-semibold text-brand">
-              <svg class="h-4 w-4 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+              <svg
+                class="h-4 w-4 text-brand"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
+                ></path>
               </svg>
               AI Root Cause
             </p>
@@ -263,9 +348,9 @@
             <div class="flex items-center justify-between border-b border-line px-4 py-3">
               <p class="text-[15px] font-semibold">Suggested fix</p>
             </div>
-            <div class="px-4 py-3 text-[13px] leading-relaxed text-ink/85 bg-[#FAFAF9] rounded-b-xl2">
-              {{ selected.aiSolution }}
-            </div>
+            <pre
+              class="px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink/85 bg-[#FAFAF9] rounded-b-xl2 whitespace-pre-wrap overflow-x-auto"
+              >{{ selected.aiSolution }}</pre>
           </section>
         } @else {
           <div class="mt-6 text-center">
@@ -275,7 +360,13 @@
               class="w-full flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-3 text-[15px] font-semibold text-white hover:bg-[#dd451a] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               @if (loadingStates()[selected.id]) {
-                <svg class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  class="h-5 w-5 animate-spin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <line x1="12" y1="2" x2="12" y2="6"></line>
                   <line x1="12" y1="18" x2="12" y2="22"></line>
                   <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
@@ -287,8 +378,16 @@
                 </svg>
                 Analyzing trace...
               } @else {
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                <svg
+                  class="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
+                  ></path>
                 </svg>
                 Ask AI to explain
               }

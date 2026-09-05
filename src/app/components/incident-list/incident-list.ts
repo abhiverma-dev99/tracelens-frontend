@@ -140,8 +140,12 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
   analyze(id: string) {
     this.loadingStates.update((states) => ({ ...states, [id]: true }));
     this.incidentService.analyzeIncident(id).subscribe({
-      next: () => {
-        this.fetchIncidents();
+      next: (response) => {
+        if (this.selectedIncident()?.id === id) {
+          this.selectedIncident.set(response.data);
+        }
+        
+        this.fetchIncidents(); 
         this.loadingStates.update((states) => ({ ...states, [id]: false }));
       },
       error: (err) => {
