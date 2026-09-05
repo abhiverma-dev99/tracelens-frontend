@@ -53,16 +53,23 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.fetchIncidents();
 
+    // 1. Initial Load of Deployments
     this.incidentService.getDeployments().subscribe({
       next: (res) => this.deployments.set(res.data),
     });
 
+    // 2. Listen for Live Incidents
     this.incidentService.onNewIncident(() => {
-      // Refresh current page strictly on new incidents
       this.fetchIncidents();
     });
 
-    // Handle Search Debounce for Performance
+    // NAYA: 3. Listen for Live GitHub Pushes (Deployments)
+    this.incidentService.onNewDeployment((newCommit) => {
+      // Insert the new commit at the top of the deployments array automatically
+      this.deployments.update((currentDeployments) => [newCommit, ...currentDeployments]);
+    });
+
+    // 4. Handle Search Debounce
     this.searchSubject.pipe(debounceTime(300), distinctUntilChanged()).subscribe((query) => {
       this.searchQuery.set(query);
       this.currentPage.set(1);
@@ -70,6 +77,7 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // ... (All other existing methods remain identical: ngAfterViewInit, fetchIncidents, analyze, etc.)
   ngAfterViewInit(): void {
     this.reRenderIcons();
   }

@@ -24,7 +24,7 @@ export class IncidentService {
 
   getIncidents(params: any = {}): Observable<any> {
     let httpParams = new HttpParams();
-    Object.keys(params).forEach(key => {
+    Object.keys(params).forEach((key) => {
       if (params[key] !== undefined && params[key] !== null && params[key] !== '') {
         httpParams = httpParams.set(key, params[key]);
       }
@@ -32,7 +32,7 @@ export class IncidentService {
 
     return this.http.get<any>(this.apiUrl, {
       headers: this.getHeaders(),
-      params: httpParams
+      params: httpParams,
     });
   }
 
@@ -43,18 +43,30 @@ export class IncidentService {
   }
 
   analyzeIncident(id: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${id}/analyze`, {}, {
-      headers: this.getHeaders(),
-    });
+    return this.http.post(
+      `${this.apiUrl}/${id}/analyze`,
+      {},
+      {
+        headers: this.getHeaders(),
+      },
+    );
   }
 
   resolveIncident(id: string): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/${id}/resolve`, {}, {
-      headers: this.getHeaders(),
-    });
+    return this.http.patch(
+      `${this.apiUrl}/${id}/resolve`,
+      {},
+      {
+        headers: this.getHeaders(),
+      },
+    );
   }
 
   onNewIncident(callback: (incident: Incident) => void) {
     this.socket.on('new-incident', callback);
+  }
+
+  onNewDeployment(callback: (deployment: any) => void) {
+    this.socket.on('new-deployment', callback);
   }
 }
