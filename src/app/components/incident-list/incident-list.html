@@ -1,9 +1,11 @@
 <div
-  class="fixed inset-0 z-50 grid min-h-screen grid-cols-1 bg-paper text-ink lg:grid-cols-[280px_minmax(0,1fr)_auto]"
+  class="fixed inset-0 z-50 grid min-h-screen grid-cols-1 bg-paper text-ink md:grid-cols-[250px_minmax(0,1fr)_auto] lg:grid-cols-[280px_minmax(0,1fr)_auto]"
 >
   <!-- SIDEBAR -->
-  <aside class="hidden flex-col border-r border-line bg-card lg:flex w-[280px]">
-    <div class="flex h-[86px] items-center border-b border-line px-6">
+  <aside
+    class="hidden h-screen flex-col overflow-y-auto thin-scroll border-r border-line bg-card md:flex w-[250px] lg:w-[280px]"
+  >
+    <div class="flex min-h-[86px] shrink-0 items-center border-b border-line px-6">
       <a routerLink="/" class="flex items-center" aria-label="Go to home">
         <img
           src="/sources/images/tracelens-logo-wordmark.svg"
@@ -13,9 +15,7 @@
       </a>
     </div>
 
-    <!-- Removed Dropdown and Copy Icon Section Here -->
-
-    <nav class="mt-8 space-y-1 px-3 text-[15px]">
+    <nav class="mt-8 space-y-1 px-3 text-[15px] shrink-0">
       <a
         class="flex items-center gap-3 rounded-lg border-l-2 border-brand bg-brandsoft px-3 py-2.5 font-medium text-brand"
         routerLink="/dashboard"
@@ -37,7 +37,7 @@
       </a>
     </nav>
 
-    <div class="mt-6 border-t border-line px-5 pt-5">
+    <div class="mt-6 border-t border-line px-5 pt-5 shrink-0">
       <div class="flex items-center justify-between">
         <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Filter by service</p>
         <svg
@@ -58,16 +58,16 @@
               type="checkbox"
               [checked]="selectedServices().has(svc.name)"
               (change)="onServiceToggle(svc.name, $event)"
-              class="h-[18px] w-[18px] rounded border-line accent-[#F4511E]"
+              class="h-[18px] w-[18px] rounded border-line accent-[#F4511E] shrink-0"
             />
-            <span class="flex-1">{{ svc.name }}</span>
+            <span class="flex-1 truncate">{{ svc.name }}</span>
             <span class="font-mono text-[13px] text-sub">{{ svc.count }}</span>
           </li>
         }
       </ul>
     </div>
 
-    <div class="mt-6 border-t border-line px-5 pt-5 pb-5">
+    <div class="mt-6 border-t border-line px-5 pt-5 pb-5 shrink-0">
       <div class="flex items-center justify-between">
         <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Recent Pushes</p>
       </div>
@@ -75,7 +75,7 @@
         @for (dep of deployments(); track dep.id) {
           <li class="flex flex-col gap-0.5">
             <span class="font-medium text-ink truncate">{{ dep.message }}</span>
-            <span class="font-mono text-[11.5px] text-sub">
+            <span class="font-mono text-[11.5px] text-sub truncate">
               {{ dep.author }} • {{ dep.commitHash }}
             </span>
           </li>
@@ -250,7 +250,7 @@
     </div>
   </main>
 
-  <!-- DETAIL PANEL (Unchanged structurally, just referencing selected properly) -->
+  <!-- DETAIL PANEL -->
   @if (selectedIncident(); as selected) {
     <aside
       class="bg-card w-[390px] flex flex-col h-screen shrink-0 overflow-hidden shadow-[-4px_0_24px_rgba(0,0,0,0.02)]"
