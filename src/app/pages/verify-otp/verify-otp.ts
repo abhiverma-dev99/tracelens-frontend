@@ -16,9 +16,7 @@ export class VerifyOtp implements AfterViewInit {
   submitting = signal(false);
   resending = signal(false);
   errorMessage = signal('');
-  infoMessage = signal(
-    "We've sent a verification code to your email. If SMTP is not set up locally, the code is printed in the API server terminal.",
-  );
+  infoMessage = signal("We've sent a verification code to your email.");
   cooldown = signal(0);
   private cooldownTimer: ReturnType<typeof setInterval> | null = null;
 
@@ -92,11 +90,9 @@ export class VerifyOtp implements AfterViewInit {
     if (this.cooldown() > 0 || this.resending()) return;
     this.resending.set(true);
     this.auth.resendOtp(this.email).subscribe({
-      next: () => {
+      next: (res) => {
         this.resending.set(false);
-        this.infoMessage.set(
-          res.data?.message || 'A new verification code was sent. Check email or the API terminal.',
-        );
+        this.infoMessage.set(res.data?.message || 'A new verification code was sent.');
         this.startCooldown(60);
       },
       error: (err: HttpErrorResponse) => {
