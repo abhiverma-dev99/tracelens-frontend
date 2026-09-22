@@ -84,6 +84,27 @@
         }
       </ul>
     </div>
+
+    <div class="mt-auto border-t border-line px-5 py-5">
+      <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Connect your app</p>
+      <p class="mt-2 truncate text-[13px] font-medium">{{ projectName() }}</p>
+      <p class="mt-1 text-[12px] leading-relaxed text-sub">
+        Copy this API key, then install <code>@tracelens/node</code>.
+      </p>
+      <div class="mt-2 flex items-center gap-2">
+        <code class="flex-1 truncate rounded-lg border border-line bg-paper px-2 py-1 font-mono text-[12px]">
+          {{ maskedIngestKey() }}
+        </code>
+        <button
+          type="button"
+          class="rounded-lg border border-line px-2 py-1 text-[12px] font-medium hover:border-ink/30"
+          (click)="copyIngestKey()"
+        >
+          {{ keyCopied() ? 'Copied' : 'Copy' }}
+        </button>
+      </div>
+      <a routerLink="/docs" class="mt-3 inline-block text-[12.5px] font-medium text-brand">Setup guide</a>
+    </div>
   </aside>
 
   <!-- MAIN -->
@@ -233,8 +254,22 @@
                   </tr>
                 } @empty {
                   <tr>
-                    <td colspan="5" class="py-12 text-center text-sub">
-                      No incidents match your filters.
+                    <td colspan="5" class="px-8 py-12 text-center">
+                      @if (hasActiveFilters()) {
+                        <p class="text-sub">No incidents match your filters.</p>
+                      } @else {
+                        <p class="text-[16px] font-semibold">Connect your application to start monitoring incidents.</p>
+                        <p class="mt-2 text-[14px] text-sub">
+                          Copy the API key in the sidebar, install <code>@tracelens/node</code>, and
+                          trigger an error.
+                        </p>
+                        <a
+                          routerLink="/docs"
+                          class="mt-4 inline-flex rounded-lg bg-brand px-4 py-2 text-[14px] font-semibold text-white hover:bg-[#dd451a]"
+                        >
+                          Open setup guide
+                        </a>
+                      }
                     </td>
                   </tr>
                 }
@@ -360,7 +395,10 @@
             >{{ selected.stackTrace }}</pre>
         </section>
 
-        @if (selected.aiRootCause) {
+        @if (selected.aiRootCause || selected.aiSolution || streamingIncidentId() === selected.id) {
+          @if (streamingIncidentId() === selected.id) {
+            <p class="mt-5 text-[13px] text-brand" aria-live="polite">AI is analyzing…</p>
+          }
           <section class="mt-5 rounded-xl2 border border-brand/30 bg-brandsoft p-4">
             <p class="flex items-center gap-2 text-[15px] font-semibold text-brand">
               <svg
@@ -376,7 +414,9 @@
               </svg>
               AI Root Cause
             </p>
-            <p class="mt-3 text-[14px] leading-relaxed text-ink/85">{{ selected.aiRootCause }}</p>
+            <p class="mt-3 text-[14px] leading-relaxed text-ink/85 whitespace-pre-wrap">
+              {{ selected.aiRootCause || 'Analyzing incident...' }}
+            </p>
           </section>
 
           <section class="mt-5 rounded-xl2 border border-line">
@@ -385,7 +425,7 @@
             </div>
             <pre
               class="px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink/85 bg-[#FAFAF9] rounded-b-xl2 whitespace-pre-wrap overflow-x-auto"
-              >{{ selected.aiSolution }}</pre>
+              >{{ selected.aiSolution || '' }}</pre>
           </section>
         } @else {
           <div class="mt-6 text-center">
@@ -394,38 +434,18 @@
               [disabled]="loadingStates()[selected.id]"
               class="w-full flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-3 text-[15px] font-semibold text-white hover:bg-[#dd451a] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              @if (loadingStates()[selected.id]) {
-                <svg
-                  class="h-5 w-5 animate-spin"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <line x1="12" y1="2" x2="12" y2="6"></line>
-                  <line x1="12" y1="18" x2="12" y2="22"></line>
-                  <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-                  <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-                  <line x1="2" y1="12" x2="6" y2="12"></line>
-                  <line x1="18" y1="12" x2="22" y2="12"></line>
-                  <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-                  <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
-                </svg>
-                Analyzing trace...
-              } @else {
-                <svg
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
-                  ></path>
-                </svg>
-                Ask AI to explain
-              }
+              <svg
+                class="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
+                ></path>
+              </svg>
+              Ask AI to explain
             </button>
           </div>
         }

@@ -1,293 +1,220 @@
 <div class="mx-auto grid max-w-[1400px] grid-cols-1 lg:grid-cols-[270px_minmax(0,1fr)_260px]">
-  <!-- SIDEBAR (LEFT) -->
   <aside class="hidden border-r border-line px-6 py-8 lg:block">
-    <div class="flex h-[42px] items-center gap-2.5 rounded-lg border border-line bg-card px-3">
-      <i data-lucide="search" class="h-4 w-4 text-mut"></i>
-      <input
-        placeholder="Search docs"
-        class="h-full w-full bg-transparent text-[14px] outline-none placeholder:text-mut"
-      />
-      <span class="rounded border border-line px-1.5 font-mono text-[11px] text-mut">⌘K</span>
-    </div>
-
-    <nav class="mt-8 space-y-8 text-[14px]">
+    <nav class="space-y-8 text-[14px]">
       <div>
-        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Getting Started</p>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Start here</p>
         <ul class="mt-3 space-y-2.5">
           <li>
-            <a
-              class="-ml-4 block border-l-2 border-brand pl-4 font-medium text-brand"
-              href="#quickstart"
-              >Quickstart</a
+            <a class="-ml-4 block border-l-2 border-brand pl-4 font-medium text-brand" href="#what"
+              >What is TraceLens?</a
             >
+          </li>
+          <li>
+            <a class="text-sub hover:text-ink" href="#quickstart">Quick Start</a>
           </li>
         </ul>
       </div>
       <div>
-        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Integrations</p>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Setup</p>
         <ul class="mt-3 space-y-2.5">
-          <li>
-            <a class="text-sub hover:text-ink transition-colors" href="#webhook">GitHub Webhooks</a>
-          </li>
-          <li>
-            <a class="text-sub hover:text-ink transition-colors" href="#nodejs">Node.js Setup</a>
-          </li>
-          <li>
-            <a class="text-sub hover:text-ink transition-colors" href="#python">Python Setup</a>
-          </li>
-          <li>
-            <a class="text-sub hover:text-ink transition-colors" href="#frontend"
-              >Frontend (HTML/JS)</a
-            >
-          </li>
+          <li><a class="text-sub hover:text-ink" href="#nodejs">Node.js Setup</a></li>
+          <li><a class="text-sub hover:text-ink" href="#express">Express Setup</a></li>
+          <li><a class="text-sub hover:text-ink" href="#env">Environment Variables</a></li>
         </ul>
       </div>
       <div>
-        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Guides</p>
+        <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">Using TraceLens</p>
         <ul class="mt-3 space-y-2.5">
-          <li>
-            <a class="text-sub hover:text-ink transition-colors" href="#testing">How to Test</a>
-          </li>
-          <li>
-            <a class="text-sub hover:text-ink transition-colors" href="#security"
-              >Securing API Keys</a
-            >
-          </li>
+          <li><a class="text-sub hover:text-ink" href="#after">What happens after setup?</a></li>
+          <li><a class="text-sub hover:text-ink" href="#github">GitHub / Deployments</a></li>
+          <li><a class="text-sub hover:text-ink" href="#ai">AI Incident Analysis</a></li>
         </ul>
       </div>
     </nav>
   </aside>
 
-  <!-- ARTICLE (MAIN) -->
-  <main class="px-8 py-8 scroll-smooth" id="quickstart">
-    <p class="text-[14px] text-sub">
-      Getting Started &nbsp;›&nbsp; <span class="text-brand">Quickstart</span>
-    </p>
-    <h1 class="mt-4 text-[46px] font-extrabold leading-none">Quickstart</h1>
+  <main class="px-8 py-8 scroll-smooth">
+    <p class="text-[14px] text-sub">Docs &nbsp;›&nbsp; <span class="text-brand">Getting started</span></p>
+    <h1 class="mt-4 text-[46px] font-extrabold leading-none">Get TraceLens running</h1>
     <p class="mt-4 max-w-[640px] text-[16px] leading-relaxed text-sub">
-      Get TraceLens up and running in a few minutes. Connect your repository and instrument your
-      application to start capturing live runtime crashes and deployments.
+      Create an account, copy your API key, install the Node SDK, and watch errors show up in the
+      dashboard.
     </p>
     <div class="my-7 h-px bg-line"></div>
 
-    <section class="space-y-12 max-w-[720px]">
-      <!-- 1. Webhook -->
-      <div id="webhook" class="scroll-mt-24">
-        <h2 class="flex items-center gap-3 text-[19px] font-bold">
-          <span
-            class="flex h-6 w-6 items-center justify-center rounded-full bg-brand font-mono text-[12px] text-white"
-            >1</span
-          >
-          Connect GitHub Webhook
-        </h2>
-        <p class="mt-2 pl-9 text-[15px] leading-relaxed text-sub">
-          This allows TraceLens to track your recent pushes. Go to your repository
-          <strong>Settings > Webhooks > Add webhook</strong>.
+    <section class="space-y-14 max-w-[720px]">
+      <div id="what" class="scroll-mt-24">
+        <h2 class="text-[22px] font-bold">What is TraceLens?</h2>
+        <p class="mt-3 text-[15px] leading-relaxed text-sub">
+          TraceLens is an AI-powered incident and debugging platform for developers. When your Node
+          app throws, TraceLens stores the error, stack trace, and service name. You can then open
+          the incident, see recent deployments, and ask AI for a likely root cause and a suggested
+          fix.
         </p>
-        <div class="mt-3 ml-9 overflow-hidden rounded-xl border border-line bg-card p-5">
-          <ul class="space-y-3 text-sm text-ink list-disc list-inside">
+      </div>
+
+      <div id="quickstart" class="scroll-mt-24">
+        <h2 class="text-[22px] font-bold">Quick Start</h2>
+        <ol class="mt-4 space-y-3 text-[15px] leading-relaxed text-sub list-decimal pl-5">
+          <li><a routerLink="/signup" class="text-brand font-medium">Create a TraceLens account</a> and verify your email.</li>
+          <li>Open the dashboard. A project is created for you automatically.</li>
+          <li>Copy the project API key from the dashboard sidebar.</li>
+          <li>Install the Node SDK in your application.</li>
+          <li>Call <code class="bg-[#F5F5F4] px-1.5 py-0.5 rounded">TraceLens.init()</code> once at startup.</li>
+          <li>Run the app and trigger an error.</li>
+          <li>Refresh the dashboard — the incident should appear.</li>
+          <li>Open it and click <strong>Ask AI to explain</strong>.</li>
+        </ol>
+      </div>
+
+      <div id="nodejs" class="scroll-mt-24">
+        <h2 class="text-[22px] font-bold">Node.js Setup</h2>
+        <p class="mt-3 text-[15px] leading-relaxed text-sub">
+          The API key comes from your TraceLens dashboard after you sign in. Treat it like a secret.
+        </p>
+        <div class="mt-4 overflow-hidden rounded-xl border border-line">
+          <div class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70">
+            bash
+            <button type="button" (click)="copyCode('install', installCode)" class="hover:text-white">
+              {{ copied === 'install' ? 'Copied' : 'Copy' }}
+            </button>
+          </div>
+          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white overflow-x-auto">{{ installCode }}</pre>
+        </div>
+        <div class="mt-4 overflow-hidden rounded-xl border border-line">
+          <div class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70">
+            typescript
+            <button type="button" (click)="copyCode('init', initCode)" class="hover:text-white">
+              {{ copied === 'init' ? 'Copied' : 'Copy' }}
+            </button>
+          </div>
+          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white overflow-x-auto">{{ initCode }}</pre>
+        </div>
+        <p class="mt-3 text-[14px] text-sub">
+          After <code>init()</code>, the SDK listens for <code>uncaughtException</code> and
+          <code>unhandledRejection</code> and sends them to TraceLens. If TraceLens is down, your
+          app keeps running.
+        </p>
+      </div>
+
+      <div id="express" class="scroll-mt-24">
+        <h2 class="text-[22px] font-bold">Express Setup</h2>
+        <p class="mt-3 text-[15px] leading-relaxed text-sub">
+          Add the error handler after your routes. It reports the error, then calls
+          <code class="bg-[#F5F5F4] px-1.5 py-0.5 rounded">next(err)</code> so your existing error
+          responses still work.
+        </p>
+        <div class="mt-4 overflow-hidden rounded-xl border border-line">
+          <div class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70">
+            typescript
+            <button type="button" (click)="copyCode('express', expressCode)" class="hover:text-white">
+              {{ copied === 'express' ? 'Copied' : 'Copy' }}
+            </button>
+          </div>
+          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white overflow-x-auto">{{ expressCode }}</pre>
+        </div>
+      </div>
+
+      <div id="env" class="scroll-mt-24">
+        <h2 class="text-[22px] font-bold">Environment Variables</h2>
+        <div class="mt-4 overflow-hidden rounded-xl border border-line">
+          <div class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70">
+            env
+            <button type="button" (click)="copyCode('env', envCode)" class="hover:text-white">
+              {{ copied === 'env' ? 'Copied' : 'Copy' }}
+            </button>
+          </div>
+          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white overflow-x-auto">{{ envCode }}</pre>
+        </div>
+        <ul class="mt-4 space-y-2 text-[15px] text-sub">
+          <li><strong class="text-ink">TRACELENS_API_KEY</strong> — your project ingest key from the dashboard.</li>
+          <li>
+            <strong class="text-ink">TRACELENS_BASE_URL</strong> — optional. Defaults to the hosted
+            TraceLens API. Use <code class="bg-[#F5F5F4] px-1.5 py-0.5 rounded">http://localhost:3000</code>
+            when running the API locally.
+          </li>
+        </ul>
+      </div>
+
+      <div id="after" class="scroll-mt-24">
+        <h2 class="text-[22px] font-bold">What happens after setup?</h2>
+        <pre class="mt-4 rounded-xl border border-line bg-[#FAFAF9] p-4 font-mono text-[13px] leading-7 text-ink">Your application
+      ↓
+TraceLens SDK
+      ↓
+TraceLens API
+      ↓
+Incident stored
+      ↓
+Dashboard
+      ↓
+AI analysis</pre>
+        <p class="mt-3 text-[15px] leading-relaxed text-sub">
+          Try this locally after init:
+        </p>
+        <div class="mt-3 overflow-hidden rounded-xl border border-line">
+          <div class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70">
+            typescript
+            <button type="button" (click)="copyCode('test', testCode)" class="hover:text-white">
+              {{ copied === 'test' ? 'Copied' : 'Copy' }}
+            </button>
+          </div>
+          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white overflow-x-auto">{{ testCode }}</pre>
+        </div>
+      </div>
+
+      <div id="github" class="scroll-mt-24">
+        <h2 class="text-[22px] font-bold">GitHub / Deployment Tracking</h2>
+        <p class="mt-3 text-[15px] leading-relaxed text-sub">
+          Optional. Add a GitHub webhook so TraceLens records pushes next to your incidents. AI can
+          use those recent commits when it explains an error.
+        </p>
+        <div class="mt-4 rounded-xl border border-line bg-card p-5 text-[14px] leading-relaxed">
+          <p>In the GitHub repo: <strong>Settings → Webhooks → Add webhook</strong></p>
+          <ul class="mt-3 space-y-2 list-disc pl-5 text-sub">
             <li>
-              <strong>Payload URL:</strong>
-              <code class="bg-[#F5F5F4] px-1.5 py-0.5 rounded text-brand"
-                >https://tracelens-7hdm.onrender.com/api/webhooks/github/&lt;YOUR_API_KEY&gt;</code
-              >
+              Payload URL:
+              <code class="bg-[#F5F5F4] px-1.5 py-0.5 rounded text-brand break-all"
+                >https://tracelens-7hdm.onrender.com/api/webhooks/github/&lt;YOUR_API_KEY&gt;</code>
             </li>
-            <li>
-              <strong>Content type:</strong> Select
-              <code class="bg-[#F5F5F4] px-1.5 py-0.5 rounded">application/json</code>
-            </li>
-            <li>Select <strong>Just the push event</strong> and save.</li>
+            <li>Content type: <code class="bg-[#F5F5F4] px-1.5 py-0.5 rounded">application/json</code></li>
+            <li>Event: Just the <strong>push</strong> event</li>
           </ul>
         </div>
       </div>
 
-      <!-- 2. Node.js -->
-      <div id="nodejs" class="scroll-mt-24">
-        <h2 class="flex items-center gap-3 text-[19px] font-bold">
-          <span
-            class="flex h-6 w-6 items-center justify-center rounded-full bg-brand font-mono text-[12px] text-white"
-            >2</span
-          >
-          Node.js Integration
-        </h2>
-        <p class="mt-2 pl-9 text-[15px] leading-relaxed text-sub">
-          Drop this snippet into your <code>index.js</code> or global error handler to capture
-          Node.js crashes.
+      <div id="ai" class="scroll-mt-24">
+        <h2 class="text-[22px] font-bold">AI Incident Analysis</h2>
+        <p class="mt-3 text-[15px] leading-relaxed text-sub">
+          Open an incident and ask AI to explain it. TraceLens uses the error, stack trace, and
+          recent deployments to produce:
         </p>
-        <div class="mt-3 ml-9 overflow-hidden rounded-xl border border-line">
-          <div
-            class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70"
-          >
-            javascript
-            <button
-              (click)="copyCode(nodeCode)"
-              class="hover:text-white flex items-center gap-1.5 transition-colors"
-            >
-              <i data-lucide="copy" class="h-3.5 w-3.5"></i> Copy
-            </button>
-          </div>
-          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white overflow-x-auto">{{
-            nodeCode
-          }}</pre>
-        </div>
-      </div>
-
-      <!-- 3. Python -->
-      <div id="python" class="scroll-mt-24">
-        <h2 class="flex items-center gap-3 text-[19px] font-bold">
-          <span
-            class="flex h-6 w-6 items-center justify-center rounded-full bg-brand font-mono text-[12px] text-white"
-            >3</span
-          >
-          Python Integration
-        </h2>
-        <p class="mt-2 pl-9 text-[15px] leading-relaxed text-sub">
-          For Python workers or scripts, wrap your execution block with this error reporter.
-        </p>
-        <div class="mt-3 ml-9 overflow-hidden rounded-xl border border-line">
-          <div
-            class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70"
-          >
-            python
-            <button
-              (click)="copyCode(pythonCode)"
-              class="hover:text-white flex items-center gap-1.5 transition-colors"
-            >
-              <i data-lucide="copy" class="h-3.5 w-3.5"></i> Copy
-            </button>
-          </div>
-          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white overflow-x-auto">{{
-            pythonCode
-          }}</pre>
-        </div>
-      </div>
-
-      <!-- 4. Frontend -->
-      <div id="frontend" class="scroll-mt-24">
-        <h2 class="flex items-center gap-3 text-[19px] font-bold">
-          <span
-            class="flex h-6 w-6 items-center justify-center rounded-full bg-brand font-mono text-[12px] text-white"
-            >4</span
-          >
-          Frontend (HTML/JS) Integration
-        </h2>
-        <p class="mt-2 pl-9 text-[15px] leading-relaxed text-sub">
-          Place this script in your <code>&lt;head&gt;</code> or main JS file to catch browser
-          errors.
-        </p>
-        <div class="mt-3 ml-9 overflow-hidden rounded-xl border border-line">
-          <div
-            class="flex items-center justify-between bg-night px-4 py-2.5 font-mono text-[12.5px] text-white/70"
-          >
-            javascript
-            <button
-              (click)="copyCode(frontendCode)"
-              class="hover:text-white flex items-center gap-1.5 transition-colors"
-            >
-              <i data-lucide="copy" class="h-3.5 w-3.5"></i> Copy
-            </button>
-          </div>
-          <pre class="bg-night p-4 font-mono text-[13px] leading-6 text-white overflow-x-auto">{{
-            frontendCode
-          }}</pre>
-        </div>
-      </div>
-
-      <!-- 5. How to Test -->
-      <div id="testing" class="pt-6 border-t border-line scroll-mt-24">
-        <h2 class="text-[22px] font-bold">How to Test (End-to-End)</h2>
-        <p class="mt-3 text-[15px] text-sub">
-          Follow these exact steps to see TraceLens in action:
-        </p>
-        <div class="mt-5 space-y-4">
-          <div class="bg-card border border-line rounded-lg p-5">
-            <h3 class="font-semibold text-ink text-[15px]">Step 1: Write a Bug</h3>
-            <p class="text-sm text-sub mt-1">
-              Create a file named <code>test.js</code>. Paste the
-              <strong>Node.js Integration</strong> snippet above, and add a fake crash at the bottom
-              of the file:
-            </p>
-            <code class="block bg-[#F5F5F4] p-3 rounded mt-3 text-[13px] font-mono">
-              // Deliberate crash for testing <br />
-              setTimeout(() => {{ '{' }} <br />
-              &nbsp;&nbsp;throw new Error("Testing TraceLens Connection!"); <br />
-              {{ '}' }}, 1000);
-            </code>
-          </div>
-          <div class="bg-card border border-line rounded-lg p-5">
-            <h3 class="font-semibold text-ink text-[15px]">Step 2: Push to GitHub</h3>
-            <p class="text-sm text-sub mt-1">
-              Commit this buggy code and push it to your repository.
-              <strong>This triggers the Webhook.</strong>
-            </p>
-            <code class="block bg-[#F5F5F4] p-3 rounded mt-3 text-[13px] font-mono">
-              git add test.js <br />
-              git commit -m "Added test bug" <br />
-              git push origin main
-            </code>
-          </div>
-          <div class="bg-card border border-line rounded-lg p-5">
-            <h3 class="font-semibold text-ink text-[15px]">Step 3: Run the Code Locally</h3>
-            <p class="text-sm text-sub mt-1">
-              Execute the file in your terminal. It will crash and <strong>trigger the API.</strong>
-            </p>
-            <code class="block bg-[#F5F5F4] p-3 rounded mt-3 text-[13px] font-mono"
-              >node test.js</code
-            >
-          </div>
-          <div class="bg-brandsoft border border-brand/30 rounded-lg p-5 flex gap-3">
-            <i data-lucide="check-circle" class="h-5 w-5 shrink-0 text-brand"></i>
-            <div>
-              <h3 class="font-semibold text-brand text-[15px]">Check Your Dashboard!</h3>
-              <p class="text-sm text-brand/80 mt-1">
-                Go to TraceLens. The incident and the exact commit will be correlated automatically.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. Security -->
-      <div id="security" class="pt-6 border-t border-line scroll-mt-24">
-        <h2 class="text-[22px] font-bold">Securing Your Ingest Key</h2>
-        <div class="mt-4 flex gap-3 rounded-xl border border-brand/30 bg-brandsoft p-4">
-          <i data-lucide="shield-alert" class="h-5 w-5 shrink-0 text-brand"></i>
-          <div class="text-[14.5px]">
-            <p class="font-semibold">Do not expose your key in public repositories.</p>
-            <p class="mt-1 text-sub">
-              Instead of hardcoding the Bearer token in the snippets above, store it in an
-              Environment Variable (e.g., a <code>.env</code> file) that is ignored by Git.
-            </p>
-          </div>
+        <ul class="mt-3 space-y-2 text-[15px] text-sub">
+          <li><strong class="text-ink">Root cause</strong> — what likely broke, and which commit may have caused it.</li>
+          <li><strong class="text-ink">Suggested fix</strong> — a concrete change to try.</li>
+          <li><strong class="text-ink">Deployment context</strong> — recent pushes from the GitHub webhook, if you connected it.</li>
+        </ul>
+        <div class="mt-6 rounded-xl border border-brand/30 bg-brandsoft p-4">
+          <p class="font-semibold text-brand">Next step</p>
+          <p class="mt-1 text-[14px] text-ink/80">
+            <a routerLink="/signup" class="font-medium text-brand">Create an account</a>, copy your
+            API key, and install <code>@tracelens/node</code>.
+          </p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ON THIS PAGE (RIGHT SIDEBAR) -->
   <aside class="hidden px-6 py-8 lg:block">
     <p class="font-mono text-[11.5px] uppercase tracking-wider text-mut">On this page</p>
     <ul class="mt-4 space-y-3 text-[14px]">
-      <li>
-        <a class="text-sub hover:text-ink transition-colors" href="#webhook"
-          >Connect GitHub Webhook</a
-        >
-      </li>
-      <li>
-        <a class="text-sub hover:text-ink transition-colors" href="#nodejs">Node.js Integration</a>
-      </li>
-      <li>
-        <a class="text-sub hover:text-ink transition-colors" href="#python">Python Integration</a>
-      </li>
-      <li>
-        <a class="text-sub hover:text-ink transition-colors" href="#frontend"
-          >Frontend Integration</a
-        >
-      </li>
-      <li><a class="text-sub hover:text-ink transition-colors" href="#testing">How to Test</a></li>
-      <li>
-        <a class="text-sub hover:text-ink transition-colors" href="#security">Securing API Keys</a>
-      </li>
+      <li><a class="text-sub hover:text-ink" href="#what">What is TraceLens?</a></li>
+      <li><a class="text-sub hover:text-ink" href="#quickstart">Quick Start</a></li>
+      <li><a class="text-sub hover:text-ink" href="#nodejs">Node.js Setup</a></li>
+      <li><a class="text-sub hover:text-ink" href="#express">Express Setup</a></li>
+      <li><a class="text-sub hover:text-ink" href="#env">Environment variables</a></li>
+      <li><a class="text-sub hover:text-ink" href="#github">GitHub webhooks</a></li>
+      <li><a class="text-sub hover:text-ink" href="#ai">AI analysis</a></li>
     </ul>
   </aside>
 </div>

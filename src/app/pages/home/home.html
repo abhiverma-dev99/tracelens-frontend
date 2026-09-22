@@ -4,41 +4,36 @@
     <div class="grid items-start gap-12 lg:grid-cols-[1fr_520px]">
       <div>
         <h1 class="text-[54px] font-extrabold leading-[1.06]">
-          Understand production<br />incidents in minutes,<br />not hours
+          See what broke,<br />why it broke,<br />and what to fix
         </h1>
-        <p class="mt-6 max-w-[460px] text-[17px] leading-relaxed text-sub">
-          TraceLens correlates all your signals and code changes to help you find the root cause and
-          resolve faster.
+        <p class="mt-6 max-w-[480px] text-[17px] leading-relaxed text-sub">
+          TraceLens is an AI-powered incident and debugging platform for developers. Capture
+          runtime errors from your Node app, connect them to recent deploys, and get a root cause
+          plus a suggested fix.
         </p>
 
-        <form class="mt-8 flex max-w-[430px] gap-3" (submit)="$event.preventDefault()">
-          <input
-            type="email"
-            placeholder="Work email"
-            class="h-[46px] w-full rounded-lg border border-line bg-card px-4 text-[15px] outline-none placeholder:text-mut focus:border-brand"
-          />
-          <button
-            routerLink="/signin"
-            class="h-[46px] shrink-0 rounded-lg bg-brand px-5 text-[15px] font-semibold text-white hover:bg-[#dd451a]"
+        <div class="mt-8 flex max-w-[430px] gap-3">
+          <a
+            routerLink="/signup"
+            class="h-[46px] rounded-lg bg-brand px-5 text-[15px] font-semibold text-white hover:bg-[#dd451a] inline-flex items-center"
           >
-            Start free trial
-          </button>
-        </form>
+            Get started
+          </a>
+          <a
+            routerLink="/docs"
+            class="h-[46px] rounded-lg border border-line bg-card px-5 text-[15px] font-medium hover:border-ink/30 inline-flex items-center"
+          >
+            Read the docs
+          </a>
+        </div>
         <div class="mt-3 flex items-center gap-6 text-[14px] text-sub">
           <span class="flex items-center gap-1.5"
-            ><i data-lucide="check" class="h-4 w-4 text-mut"></i>14-day free trial</span
+            ><i data-lucide="check" class="h-4 w-4 text-mut"></i>Free to start</span
           >
           <span class="flex items-center gap-1.5"
-            ><i data-lucide="check" class="h-4 w-4 text-mut"></i>No credit card required</span
+            ><i data-lucide="check" class="h-4 w-4 text-mut"></i>Node SDK in a few minutes</span
           >
         </div>
-        <a
-          routerLink="#"
-          (click)="$event.preventDefault()"
-          class="mt-6 inline-flex items-center gap-2 rounded-lg border border-line bg-card px-4 py-2.5 text-[15px] font-medium hover:border-ink/30"
-        >
-          <i data-lucide="calendar" class="h-4 w-4"></i> Book a demo
-        </a>
       </div>
 
       <!-- incident card -->
@@ -357,7 +352,7 @@
           <div>
             <p class="font-semibold text-ink">Stack traces with context</p>
             <p class="mt-1 text-[14px] leading-relaxed text-sub">
-              Deobfuscated, symbolicated, and grouped across releases and services.
+              Open an incident and read the stack trace next to the service that produced it.
             </p>
           </div>
         </div>
@@ -384,7 +379,7 @@
           <div>
             <p class="font-semibold text-ink">Git-aware root cause</p>
             <p class="mt-1 text-[14px] leading-relaxed text-sub">
-              Automatically analyzes commits and diffs around the time of the incident.
+              AI uses the error, stack, and recent GitHub pushes to explain a likely cause.
             </p>
           </div>
         </div>
@@ -416,7 +411,7 @@
           <div>
             <p class="font-semibold text-ink">Deployments &amp; changes</p>
             <p class="mt-1 text-[14px] leading-relaxed text-sub">
-              See what shipped, where, and when—plus feature flags and config changes.
+              Connect a GitHub webhook to record commits next to the incidents they may have caused.
             </p>
           </div>
         </div>
@@ -445,9 +440,9 @@
             </svg>
           </span>
           <div>
-            <p class="font-semibold text-ink">Logs that matter</p>
+            <p class="font-semibold text-ink">A suggested fix, not just a dump</p>
             <p class="mt-1 text-[14px] leading-relaxed text-sub">
-              Correlate structured logs, traces, and metrics in one timeline.
+              Ask AI to explain the incident. You get a root cause and a concrete change to try.
             </p>
           </div>
         </div>
@@ -473,9 +468,9 @@
             </svg>
           </span>
           <div>
-            <p class="font-semibold text-ink">Works with your stack</p>
+            <p class="font-semibold text-ink">Works with Node today</p>
             <p class="mt-1 text-[14px] leading-relaxed text-sub">
-              Native integrations with your tools and workflow, out of the box.
+              Install the SDK, add a GitHub webhook if you want deploy context, and you are done.
             </p>
           </div>
         </div>
@@ -499,9 +494,9 @@
             </svg>
           </span>
           <div>
-            <p class="font-semibold text-ink">Secure by design</p>
+            <p class="font-semibold text-ink">Your project, your incidents</p>
             <p class="mt-1 text-[14px] leading-relaxed text-sub">
-              RBAC, SSO, audit logs, and data residency you can rely on.
+              Sign in to your account. Incidents stay scoped to your project API key.
             </p>
           </div>
         </div>
@@ -513,20 +508,20 @@
   <section class="mx-auto mt-14 max-w-shell px-6">
     <div class="grid grid-cols-2 rounded-xl2 border border-line bg-card md:grid-cols-4">
       <div class="border-b border-r border-line p-7 text-center md:border-b-0">
-        <p class="text-[30px] font-extrabold">2.3M+</p>
-        <p class="mt-1 text-[14px] text-sub">Incidents analyzed</p>
+        <p class="text-[30px] font-extrabold">1</p>
+        <p class="mt-1 text-[14px] text-sub">SDK install to start</p>
       </div>
       <div class="border-b border-line p-7 text-center md:border-b-0 md:border-r">
-        <p class="text-[30px] font-extrabold">150K+</p>
-        <p class="mt-1 text-[14px] text-sub">Developers using TraceLens</p>
+        <p class="text-[30px] font-extrabold">AI</p>
+        <p class="mt-1 text-[14px] text-sub">Root cause + suggested fix</p>
       </div>
       <div class="border-r border-line p-7 text-center">
-        <p class="text-[30px] font-extrabold">90%</p>
-        <p class="mt-1 text-[14px] text-sub">Faster time to resolution</p>
+        <p class="text-[30px] font-extrabold">Git</p>
+        <p class="mt-1 text-[14px] text-sub">Optional deploy tracking</p>
       </div>
       <div class="p-7 text-center">
-        <p class="text-[30px] font-extrabold">98.7%</p>
-        <p class="mt-1 text-[14px] text-sub">Customer satisfaction</p>
+        <p class="text-[30px] font-extrabold">$0</p>
+        <p class="mt-1 text-[14px] text-sub">Free while we build</p>
       </div>
     </div>
   </section>
@@ -587,17 +582,12 @@
       <div class="lg:border-l lg:border-line lg:pl-10">
         <p class="font-serif text-[40px] leading-none text-brand">”</p>
         <p class="mt-2 text-[18px] font-semibold leading-relaxed">
-          "TraceLens cut our incident resolution time by more than 70%. It's like having a senior
-          engineer on every incident."
+          Sign up, copy an API key, add the Node SDK, and the next crash lands in your dashboard.
         </p>
         <div class="mt-5 flex items-center gap-3">
-          <span
-            class="flex h-10 w-10 items-center justify-center rounded-full bg-brandsoft font-semibold text-brand"
-            >AP</span
-          >
           <div class="text-[14px]">
-            <p class="font-semibold">Arjun Patel</p>
-            <p class="text-sub">Staff Engineer, Ramp</p>
+            <p class="font-semibold">Built for developers</p>
+            <p class="text-sub">No sales call required to start monitoring a Node app.</p>
           </div>
         </div>
       </div>
@@ -610,23 +600,23 @@
       class="grid items-center gap-8 border-t border-line pt-10 lg:grid-cols-[1fr_repeat(3,180px)_auto]"
     >
       <div>
-        <h3 class="text-[22px] font-bold">Simple, transparent pricing</h3>
-        <p class="mt-1 text-[14px] text-sub">Pay for what you use. No hidden fees.</p>
+        <h3 class="text-[22px] font-bold">Free to start</h3>
+        <p class="mt-1 text-[14px] text-sub">Use the current product at no cost while we build.</p>
       </div>
       <div class="text-center lg:border-l lg:border-line">
-        <p class="font-semibold">Hobby</p>
-        <p class="mt-1 text-[14px] text-sub">Free forever</p>
-        <p class="text-[13px] text-mut">Up to 1M events/month</p>
+        <p class="font-semibold">Free</p>
+        <p class="mt-1 text-[14px] text-sub">Available now</p>
+        <p class="text-[13px] text-mut">Incidents, SDK, AI, GitHub pushes</p>
       </div>
       <div class="text-center lg:border-l lg:border-line">
         <p class="font-semibold">Team</p>
-        <p class="mt-1 text-[14px] text-sub">$25 / month</p>
-        <p class="text-[13px] text-mut">Per user, billed annually</p>
+        <p class="mt-1 text-[14px] text-sub">Coming later</p>
+        <p class="text-[13px] text-mut">More people and projects</p>
       </div>
       <div class="text-center lg:border-l lg:border-line">
-        <p class="font-semibold">Enterprise</p>
-        <p class="mt-1 text-[14px] text-sub">Custom</p>
-        <p class="text-[13px] text-mut">For large teams</p>
+        <p class="font-semibold">No card needed</p>
+        <p class="mt-1 text-[14px] text-sub">Sign up and go</p>
+        <p class="text-[13px] text-mut">Verify email, copy API key</p>
       </div>
       <a
         routerLink="/pricing"
@@ -638,29 +628,20 @@
 
   <!-- FINAL CTA -->
   <section class="mx-auto mt-16 max-w-shell border-t border-line px-6 py-14 text-center">
-    <h2 class="text-[26px] font-bold">Resolve incidents faster. Ship with confidence.</h2>
-    <form
-      class="mt-6 flex flex-wrap items-center justify-center gap-3"
-      (submit)="$event.preventDefault()"
-    >
-      <input
-        type="email"
-        placeholder="Work email"
-        class="h-[46px] w-[250px] rounded-lg border border-line bg-card px-4 text-[15px] outline-none placeholder:text-mut focus:border-brand"
-      />
-      <button
-        routerLink="/signin"
-        class="h-[46px] rounded-lg bg-brand px-5 text-[15px] font-semibold text-white hover:bg-[#dd451a]"
-      >
-        Start your free trial
-      </button>
+    <h2 class="text-[26px] font-bold">Start monitoring your Node app today</h2>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
       <a
-        routerLink="#"
-        (click)="$event.preventDefault()"
-        class="flex h-[46px] items-center gap-2 rounded-lg border border-line bg-card px-4 text-[15px] font-medium hover:border-ink/30"
-        ><i data-lucide="calendar" class="h-4 w-4"></i>Book a demo</a
+        routerLink="/signup"
+        class="h-[46px] rounded-lg bg-brand px-5 text-[15px] font-semibold text-white hover:bg-[#dd451a] inline-flex items-center"
       >
-    </form>
-    <p class="mt-3 text-[13px] text-sub">14-day free trial &nbsp;•&nbsp; No credit card required</p>
+        Create a free account
+      </a>
+      <a
+        routerLink="/docs"
+        class="flex h-[46px] items-center gap-2 rounded-lg border border-line bg-card px-4 text-[15px] font-medium hover:border-ink/30"
+        >Read the docs</a
+      >
+    </div>
+    <p class="mt-3 text-[13px] text-sub">Sign up → verify email → copy API key → install the SDK</p>
   </section>
 </main>

@@ -1,6 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-
-declare var lucide: any;
+import { refreshIcons } from '../../utils/icons';
 
 @Component({
   selector: 'app-about',
@@ -10,8 +9,6 @@ declare var lucide: any;
 })
 export class About implements AfterViewInit {
   ngAfterViewInit(): void {
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
+    refreshIcons();
   }
 }

@@ -8,12 +8,12 @@ import { AuthService } from '../../services/auth';
 import { refreshIcons } from '../../utils/icons';
 
 @Component({
-  selector: 'app-signin',
+  selector: 'app-signup',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './signin.html',
+  templateUrl: './signup.html',
 })
-export class Signin implements AfterViewInit {
+export class Signup implements AfterViewInit {
   submitting = signal(false);
   errorMessage = signal('');
 
@@ -25,8 +25,10 @@ export class Signin implements AfterViewInit {
     private router: Router,
   ) {
     this.form = this.fb.nonNullable.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
     });
   }
 
@@ -38,24 +40,24 @@ export class Signin implements AfterViewInit {
     this.errorMessage.set('');
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.errorMessage.set('Enter a valid email and password.');
+      this.errorMessage.set('Please complete all fields correctly.');
+      return;
+    }
+
+    const { name, email, password, confirmPassword } = this.form.getRawValue();
+    if (password !== confirmPassword) {
+      this.errorMessage.set('Passwords do not match.');
       return;
     }
 
     this.submitting.set(true);
-    const { email, password } = this.form.getRawValue();
-    this.auth.signin({ email, password }).subscribe({
-      next: (res) => {
-        this.auth.applySession(res.data);
-        void this.router.navigate(['/dashboard']);
+    this.auth.signup({ name, email, password }).subscribe({
+      next: () => {
+        void this.router.navigate(['/verify-otp'], { queryParams: { email } });
       },
       error: (err: HttpErrorResponse) => {
         this.submitting.set(false);
-        if (err.status === 403 && err.error?.code === 'OTP_REQUIRED') {
-          void this.router.navigate(['/verify-otp'], { queryParams: { email } });
-          return;
-        }
-        this.errorMessage.set(err.error?.error || 'Unable to sign in.');
+        this.errorMessage.set(err.error?.error || 'Unable to create account.');
       },
     });
   }

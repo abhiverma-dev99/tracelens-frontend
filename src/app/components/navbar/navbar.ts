@@ -1,7 +1,7 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
-declare var lucide: any;
+import { AuthService } from '../../services/auth';
+import { refreshIcons } from '../../utils/icons';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +11,9 @@ declare var lucide: any;
   styleUrl: './navbar.scss',
 })
 export class Navbar implements AfterViewInit {
+  readonly auth = inject(AuthService);
+
   ngAfterViewInit(): void {
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
+    refreshIcons();
   }
 }

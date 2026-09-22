@@ -1,91 +1,61 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-declare var lucide: any;
+import { RouterLink } from '@angular/router';
+import { refreshIcons } from '../../utils/icons';
 
 @Component({
   selector: 'app-docs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './docs.html',
 })
 export class Docs implements AfterViewInit {
-  nodeCode = `process.on('uncaughtException', async (error) => {
-  try {
-    await fetch('https://tracelens-7hdm.onrender.com/api/incidents', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer <YOUR_API_KEY>' // Use process.env in production
-      },
-      body: JSON.stringify({
-        message: error.message,
-        stackTrace: error.stack,
-        service: 'your-node-service'
-      })
-    });
-  } catch (err) {
-    console.error("TraceLens alert failed");
-  }
+  installCode = `npm install @tracelens/node`;
+
+  initCode = `import TraceLens from "@tracelens/node";
+
+TraceLens.init({
+  apiKey: process.env.TRACELENS_API_KEY!,
+  serviceName: "my-api",
+  environment: "production",
 });`;
 
-  pythonCode = `import urllib.request, json, traceback, ssl
+  expressCode = `import TraceLens from "@tracelens/node";
 
-def report_error(e, service_name):
-    payload = {
-        "message": str(e),
-        "stackTrace": traceback.format_exc(),
-        "service": service_name
-    }
-    ctx = ssl.create_default_context()
-    ctx.check_hostname = False
-    ctx.verify_mode = ssl.CERT_NONE
-    
-    req = urllib.request.Request(
-        'https://tracelens-7hdm.onrender.com/api/incidents',
-        data=json.dumps(payload).encode('utf-8'),
-        headers={'Content-Type': 'application/json', 'Authorization': 'Bearer <YOUR_API_KEY>'},
-        method='POST'
-    )
-    try:
-        urllib.request.urlopen(req, context=ctx)
-    except Exception:
-        pass
+TraceLens.init({
+  apiKey: process.env.TRACELENS_API_KEY!,
+  serviceName: "my-api",
+  environment: "production",
+});
 
-try:
-    # Your logic here
-    10 / 0
-except Exception as e:
-    report_error(e, "your-python-worker")`;
+// After your routes:
+app.use(TraceLens.errorHandler());`;
 
-  frontendCode = `// Attach this globally in your frontend (e.g., app.js or index.html)
-window.addEventListener('error', async function(event) {
-  try {
-    await fetch('https://tracelens-7hdm.onrender.com/api/incidents', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer <YOUR_API_KEY>'
-      },
-      body: JSON.stringify({
-        message: event.message,
-        stackTrace: event.error ? event.error.stack : 'No stack trace available',
-        service: 'frontend-web-app'
-      })
-    });
-  } catch (err) {
-    console.error("TraceLens alert failed");
-  }
-});`;
+  envCode = `TRACELENS_API_KEY=your-project-api-key
+TRACELENS_BASE_URL=https://tracelens-7hdm.onrender.com`;
+
+  testCode = `import TraceLens from "@tracelens/node";
+
+TraceLens.init({
+  apiKey: process.env.TRACELENS_API_KEY!,
+  serviceName: "test-service",
+  environment: "development",
+});
+
+throw new Error("TraceLens SDK test");`;
+
+  copied = '';
 
   ngAfterViewInit() {
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
+    refreshIcons();
   }
 
-  copyCode(text: string) {
-    navigator.clipboard.writeText(text).then(() => {
-      alert('Code copied to clipboard!');
+  copyCode(id: string, text: string) {
+    void navigator.clipboard.writeText(text).then(() => {
+      this.copied = id;
+      setTimeout(() => {
+        if (this.copied === id) this.copied = '';
+      }, 1500);
     });
   }
 }

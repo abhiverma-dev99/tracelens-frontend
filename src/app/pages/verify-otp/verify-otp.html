@@ -1,0 +1,57 @@
+<main class="flex flex-1 items-center justify-center min-h-[calc(100vh-72px)] px-6 py-20">
+  <div class="w-full max-w-[440px] rounded-xl2 border border-line bg-card p-10 shadow-card">
+    <h1 class="text-center text-[30px] font-extrabold">Verify your email</h1>
+    <p class="mt-3 text-center text-[15px] text-sub">{{ infoMessage() }}</p>
+    <p class="mt-1 text-center text-[14px] font-medium text-ink">{{ email }}</p>
+
+    <form class="mt-8 space-y-5" (submit)="$event.preventDefault(); verify()">
+      <div class="flex justify-center gap-2" (paste)="onPaste($event)">
+        @for (digit of digits; track $index) {
+          <input
+            #otpInput
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+            autocomplete="one-time-code"
+            [attr.aria-label]="'Digit ' + ($index + 1)"
+            class="h-12 w-10 rounded-lg border border-line bg-card text-center text-[18px] font-semibold outline-none focus:border-brand"
+            (input)="onInput($index, $event)"
+            (keydown)="onKeydown($index, $event)"
+          />
+        }
+      </div>
+
+      @if (errorMessage()) {
+        <p class="text-center text-[14px] text-err" role="alert">{{ errorMessage() }}</p>
+      }
+
+      <button
+        type="submit"
+        [disabled]="submitting()"
+        class="h-[48px] w-full rounded-lg bg-brand text-[15px] font-semibold text-white hover:bg-[#dd451a] disabled:opacity-50"
+      >
+        {{ submitting() ? 'Verifying…' : 'Verify' }}
+      </button>
+    </form>
+
+    <p class="mt-6 text-center text-[14px] text-sub">
+      Didn't receive it?
+      <button
+        type="button"
+        class="font-medium text-brand disabled:text-mut"
+        [disabled]="cooldown() > 0 || resending()"
+        (click)="resend()"
+      >
+        @if (cooldown() > 0) {
+          Resend OTP in {{ cooldown() }}s
+        } @else {
+          Resend OTP
+        }
+      </button>
+    </p>
+
+    <p class="mt-6 text-center text-[14px] text-sub">
+      <a routerLink="/signin" class="font-medium text-brand">Back to sign in</a>
+    </p>
+  </div>
+</main>

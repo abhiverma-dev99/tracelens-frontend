@@ -1,33 +1,34 @@
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; // <-- Added HttpHeaders
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { AuthService } from './auth';
 
 @Injectable({ providedIn: 'root' })
 export class TraceLensErrorHandler implements ErrorHandler {
   constructor(private injector: Injector) {}
 
   handleError(error: any): void {
+    console.error('Caught by TraceLens Global Handler:', error);
+
+    const auth = this.injector.get(AuthService);
+    const ingestKey = auth.currentProject()?.ingestKey;
+    if (!ingestKey) return;
+
     const http = this.injector.get(HttpClient);
-    
-    const message = error?.message || error?.toString() || 'Unknown Error';
-    const stackTrace = error?.stack || 'No stack trace available';
-    
     const payload = {
-      message: message,
-      service: 'tracelens-frontend', 
-      stackTrace: stackTrace
+      message: error?.message || error?.toString() || 'Unknown Error',
+      service: 'tracelens-frontend',
+      stackTrace: error?.stack || 'No stack trace available',
     };
 
-    // Attach the API Key
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer 80df8997-8564-4018-b818-b5a67fe26d61'
+      Authorization: `Bearer ${ingestKey}`,
+      'X-TraceLens-API-Key': ingestKey,
     });
 
-    // Pass headers in the POST request
-    http.post('http://localhost:3000/api/incidents', payload, { headers }).subscribe({
-      next: () => console.log('✅ [TraceLens SDK]: Incident auto-logged to backend.'),
-      error: (err) => console.error('❌ [TraceLens SDK]: Failed to send incident.', err)
+    http.post(`${environment.apiUrl}/incidents`, payload, { headers }).subscribe({
+      next: () => undefined,
+      error: () => undefined,
     });
-
-    console.error('Caught by TraceLens Global Handler:', error);
   }
 }

@@ -1,12 +1,24 @@
 <main class="flex flex-1 items-center justify-center min-h-[calc(100vh-72px)] px-6 py-20">
   <div class="w-full max-w-[440px] rounded-xl2 border border-line bg-card p-10 shadow-card">
-    <h1 class="text-center text-[30px] font-extrabold">Sign in to TraceLens</h1>
+    <h1 class="text-center text-[30px] font-extrabold">Create your account</h1>
 
     <form class="mt-8 space-y-5" [formGroup]="form" (ngSubmit)="submit()">
       <div>
+        <label class="text-[14px] font-semibold" for="name">Name</label>
+        <div class="mt-2 flex h-[48px] items-center gap-3 rounded-lg border border-line px-4 focus-within:border-brand">
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            autocomplete="name"
+            placeholder="Abhishek Verma"
+            class="h-full w-full bg-transparent text-[15px] outline-none placeholder:text-mut"
+          />
+        </div>
+      </div>
+      <div>
         <label class="text-[14px] font-semibold" for="email">Email</label>
         <div class="mt-2 flex h-[48px] items-center gap-3 rounded-lg border border-line px-4 focus-within:border-brand">
-          <i data-lucide="mail" class="h-4 w-4 text-mut" aria-hidden="true"></i>
           <input
             id="email"
             type="email"
@@ -18,14 +30,25 @@
         </div>
       </div>
       <div>
-        <label class="text-[14px] font-semibold" for="pw">Password</label>
+        <label class="text-[14px] font-semibold" for="password">Password</label>
         <div class="mt-2 flex h-[48px] items-center gap-3 rounded-lg border border-line px-4 focus-within:border-brand">
-          <i data-lucide="lock" class="h-4 w-4 text-mut" aria-hidden="true"></i>
           <input
-            id="pw"
+            id="password"
             type="password"
             formControlName="password"
-            autocomplete="current-password"
+            autocomplete="new-password"
+            class="h-full w-full bg-transparent text-[15px] outline-none"
+          />
+        </div>
+      </div>
+      <div>
+        <label class="text-[14px] font-semibold" for="confirmPassword">Confirm Password</label>
+        <div class="mt-2 flex h-[48px] items-center gap-3 rounded-lg border border-line px-4 focus-within:border-brand">
+          <input
+            id="confirmPassword"
+            type="password"
+            formControlName="confirmPassword"
+            autocomplete="new-password"
             class="h-full w-full bg-transparent text-[15px] outline-none"
           />
         </div>
@@ -40,13 +63,13 @@
         [disabled]="submitting()"
         class="h-[48px] w-full rounded-lg bg-brand text-[15px] font-semibold text-white hover:bg-[#dd451a] disabled:opacity-50"
       >
-        {{ submitting() ? 'Signing in…' : 'Sign In' }}
+        {{ submitting() ? 'Creating account…' : 'Create Account' }}
       </button>
     </form>
 
     <p class="mt-8 text-center text-[14px] text-sub">
-      Don't have an account?
-      <a routerLink="/signup" class="font-medium text-brand">Create account</a>
+      Already have an account?
+      <a routerLink="/signin" class="font-medium text-brand">Sign in</a>
     </p>
   </div>
 </main>

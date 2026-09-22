@@ -1,20 +1,16 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-declare var lucide: any;
+import { RouterLink } from '@angular/router';
+import { refreshIcons } from '../../utils/icons';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './product.html'
+  imports: [CommonModule, RouterLink],
+  templateUrl: './product.html',
 })
 export class Product implements AfterViewInit {
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      }
-    }, 50);
+    refreshIcons();
   }
 }

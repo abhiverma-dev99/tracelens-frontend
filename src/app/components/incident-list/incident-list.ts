@@ -1,13 +1,13 @@
-import { Component, OnInit, AfterViewInit, signal, computed } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { IncidentService } from '../../services/incident';
+import { AuthService } from '../../services/auth';
 import { Incident } from '../../models/incident.model';
-import { environment } from '../../../environments/environment';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-declare var lucide: any;
+import { refreshIcons } from '../../utils/icons';
 
 @Component({
   selector: 'app-incident-list',
@@ -15,7 +15,7 @@ declare var lucide: any;
   imports: [CommonModule, RouterLink],
   templateUrl: './incident-list.html',
 })
-export class IncidentListComponent implements OnInit, AfterViewInit {
+export class IncidentListComponent implements OnInit, AfterViewInit, OnDestroy {
   incidents = signal<Incident[]>([]);
   isFetching = signal<boolean>(true);
   loadingStates = signal<Record<string, boolean>>({});
@@ -35,8 +35,23 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
   serviceCounts = signal<{ name: string; count: number }[]>([]);
   deployments = signal<any[]>([]);
 
-  projectName = signal<string>(environment.projectName);
+  projectName = signal<string>('My Project');
+  ingestKey = signal<string>('');
+  maskedIngestKey = computed(() => {
+    const key = this.ingestKey();
+    if (!key) return 'Not available';
+    return key.length <= 8 ? '••••••••' : `${key.slice(0, 4)}••••${key.slice(-4)}`;
+  });
+  streamingIncidentId = signal<string | null>(null);
+  keyCopied = signal(false);
+  hasActiveFilters = computed(
+    () =>
+      this.searchQuery().length > 0 ||
+      this.selectedStatus() !== 'ALL' ||
+      this.selectedServices().size > 0,
+  );
   private searchSubject = new Subject<string>();
+  private analysisSub: Subscription | null = null;
 
   errorsPerMinute = computed(() => {
     const total = this.totalItems();
@@ -48,9 +63,15 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
   );
   endIndex = computed(() => Math.min(this.currentPage() * this.itemsPerPage(), this.totalItems()));
 
-  constructor(private incidentService: IncidentService) {}
+  constructor(
+    private incidentService: IncidentService,
+    private auth: AuthService,
+  ) {}
 
   ngOnInit(): void {
+    const project = this.auth.currentProject();
+    if (project?.name) this.projectName.set(project.name);
+    if (project?.ingestKey) this.ingestKey.set(project.ingestKey);
     this.fetchIncidents();
 
     // 1. Initial Load of Deployments
@@ -84,7 +105,7 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
 
   reRenderIcons() {
     setTimeout(() => {
-      if (typeof lucide !== 'undefined') lucide.createIcons();
+      refreshIcons();
     }, 50);
   }
 
@@ -145,24 +166,70 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
   }
 
   analyze(id: string) {
+    this.analysisSub?.unsubscribe();
+    this.incidentService.stopAnalysis();
     this.loadingStates.update((states) => ({ ...states, [id]: true }));
-    this.incidentService.analyzeIncident(id).subscribe({
-      next: (response) => {
-        if (this.selectedIncident()?.id === id) {
-          this.selectedIncident.set(response.data);
+    this.streamingIncidentId.set(id);
+
+    const selected = this.selectedIncident();
+    if (selected?.id === id) {
+      this.selectedIncident.set({
+        ...selected,
+        aiRootCause: selected.aiRootCause || '',
+        aiSolution: selected.aiSolution || '',
+      });
+    }
+
+    this.analysisSub = this.incidentService.streamAnalysis(id).subscribe({
+      next: (event) => {
+        if (event.type === 'chunk') {
+          this.appendAnalysis(id, event.section, event.text);
+          return;
         }
-
-        this.incidents.update((currentIncidents) =>
-          currentIncidents.map((inc) => (inc.id === id ? response.data : inc)),
-        );
-
-        this.loadingStates.update((states) => ({ ...states, [id]: false }));
+        if (event.type === 'error') {
+          console.error('AI Analysis failed:', event.message);
+        }
+        this.finishAnalysis(id);
       },
       error: (err) => {
         console.error('AI Analysis failed:', err);
-        this.loadingStates.update((states) => ({ ...states, [id]: false }));
+        this.finishAnalysis(id);
       },
+      complete: () => this.finishAnalysis(id),
     });
+  }
+
+  copyIngestKey() {
+    const key = this.ingestKey();
+    if (!key || !navigator.clipboard) return;
+    void navigator.clipboard.writeText(key).then(() => {
+      this.keyCopied.set(true);
+      setTimeout(() => this.keyCopied.set(false), 1500);
+    });
+  }
+
+  private appendAnalysis(id: string, section: 'rootCause' | 'solution', text: string) {
+    const field = section === 'rootCause' ? 'aiRootCause' : 'aiSolution';
+    const current = this.selectedIncident();
+    if (current?.id === id) {
+      this.selectedIncident.set({
+        ...current,
+        [field]: `${current[field] || ''}${text}`,
+      });
+    }
+
+    this.incidents.update((items) =>
+      items.map((incident) =>
+        incident.id === id
+          ? { ...incident, [field]: `${incident[field] || ''}${text}` }
+          : incident,
+      ),
+    );
+  }
+
+  private finishAnalysis(id: string) {
+    this.loadingStates.update((states) => ({ ...states, [id]: false }));
+    if (this.streamingIncidentId() === id) this.streamingIncidentId.set(null);
   }
 
   selectIncident(incident: Incident) {
@@ -181,7 +248,15 @@ export class IncidentListComponent implements OnInit, AfterViewInit {
   }
 
   closePanel() {
+    this.incidentService.stopAnalysis();
+    this.analysisSub?.unsubscribe();
+    this.streamingIncidentId.set(null);
     this.selectedIncident.set(null);
+  }
+
+  ngOnDestroy(): void {
+    this.incidentService.stopAnalysis();
+    this.analysisSub?.unsubscribe();
   }
 
   nextPage() {
