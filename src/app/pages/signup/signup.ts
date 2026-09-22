@@ -57,6 +57,10 @@ export class Signup implements AfterViewInit {
       },
       error: (err: HttpErrorResponse) => {
         this.submitting.set(false);
+        if (err.status === 409 || err.error?.code === 'OTP_REQUIRED') {
+          void this.router.navigate(['/verify-otp'], { queryParams: { email } });
+          return;
+        }
         this.errorMessage.set(err.error?.error || 'Unable to create account.');
       },
     });
