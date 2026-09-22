@@ -10,6 +10,8 @@ interface ApiEnvelope<T> {
   data: T;
 }
 
+const SESSION_KEY = 'tl_session';
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly apiUrl = `${environment.apiUrl}/auth`;
@@ -66,12 +68,22 @@ export class AuthService {
     this.accessToken.set(session.accessToken);
     this.currentUser.set(session.user);
     this.currentProject.set(session.project);
+    try {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    } catch {
+      // Ignore quota / private-mode failures.
+    }
   }
 
   clearSession() {
     this.accessToken.set(null);
     this.currentUser.set(null);
     this.currentProject.set(null);
+    try {
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch {
+      // Ignore storage access failures.
+    }
   }
 
   async refresh(): Promise<boolean> {
@@ -88,10 +100,7 @@ export class AuthService {
         this.applySession(res.data);
         return true;
       })
-      .catch(() => {
-        this.clearSession();
-        return false;
-      })
+      .catch(() => false)
       .finally(() => {
         this.refreshInFlight = null;
       });
@@ -111,7 +120,23 @@ export class AuthService {
     await this.router.navigate(['/signin']);
   }
 
+  private readStoredSession() {
+    try {
+      const raw = sessionStorage.getItem(SESSION_KEY);
+      if (!raw) return;
+      const session = JSON.parse(raw) as AuthSession;
+      if (session?.accessToken && session.user) {
+        this.accessToken.set(session.accessToken);
+        this.currentUser.set(session.user);
+        this.currentProject.set(session.project);
+      }
+    } catch {
+      sessionStorage.removeItem(SESSION_KEY);
+    }
+  }
+
   private async restoreSession() {
+    this.readStoredSession();
     await this.refresh();
     this.ready.set(true);
   }

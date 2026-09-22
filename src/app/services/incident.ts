@@ -128,7 +128,7 @@ export class IncidentService {
   }
 
   private connectSocket(token: string) {
-    const socketUrl = environment.apiUrl.replace('/api', '');
+    const socketUrl = environment.socketUrl || environment.apiUrl.replace('/api', '');
     if (this.socket) {
       this.socket.auth = { token };
       if (!this.socket.connected) this.socket.connect();

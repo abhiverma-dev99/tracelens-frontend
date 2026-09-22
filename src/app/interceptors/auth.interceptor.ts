@@ -35,6 +35,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         switchMap((ok) => {
           const nextToken = auth.accessToken();
           if (!ok || !nextToken) {
+            auth.clearSession();
             void router.navigate(['/signin']);
             return throwError(() => error);
           }

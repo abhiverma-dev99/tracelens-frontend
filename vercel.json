@@ -3,6 +3,10 @@
   "outputDirectory": "dist/tracelens-ui/browser",
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "https://tracelens-7hdm.onrender.com/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
