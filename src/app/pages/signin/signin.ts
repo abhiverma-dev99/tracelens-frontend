@@ -7,6 +7,9 @@ import { AuthService } from '../../services/auth';
 
 import { refreshIcons } from '../../utils/icons';
 
+export const DEMO_EMAIL = 'demo@tracelens.app';
+export const DEMO_PASSWORD = 'TraceLens1';
+
 @Component({
   selector: 'app-signin',
   standalone: true,
@@ -25,8 +28,8 @@ export class Signin implements AfterViewInit {
     private router: Router,
   ) {
     this.form = this.fb.nonNullable.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      email: [DEMO_EMAIL, [Validators.required, Validators.email]],
+      password: [DEMO_PASSWORD, [Validators.required]],
     });
   }
 
